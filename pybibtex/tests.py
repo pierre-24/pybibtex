@@ -96,3 +96,16 @@ class ParserTestCase(unittest.TestCase):
         self.assertEqual(item.values[item_k1_key], item_k1_value)
         self.assertIn(item_k2_key, item.values)
         self.assertEqual(item.values[item_k2_key], item_k2_value)
+
+    def test_two_items_noval(self):
+        item1_type = 'article'
+        item1_name = 'test1'
+        item2_type = 'book'
+        item2_name = 'test2'
+
+        database = '@{}{{{}, }} @{}{{{}, }}'.format(
+            item1_type, item1_name, item2_type, item2_name)
+
+        result = self.parse(database)
+
+        self.assertTrue(len(result.db) == 2)
