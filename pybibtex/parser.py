@@ -140,7 +140,9 @@ class Parser:
     def item(self) -> Item:
         """Get an item:
 
-        ``Item := AT item_type LBRRACE key COMMA (value (COMMA value)*)? COMMA? RBRACE``
+        ```
+        item := AT item_type LBRRACE key COMMA (value (COMMA value)*)? COMMA? RBRACE ;
+        ```
         """
 
         self.skip_empty()
@@ -170,14 +172,13 @@ class Parser:
         while True:
             self.skip_empty()
 
-            if self.current_token.type == TokenType.RCBRACE:  # nothing after COMMA
-                break
-
             try:
                 k, v = self.value()
-                values[k] = v
             except ParserSyntaxError as e:
                 raise ParserSyntaxError('while parsing {}, {}'.format(item_key, e))
+
+            if k:
+                values[k] = v
 
             self.skip_empty()
             if self.current_token.type != TokenType.COMMA:
@@ -193,10 +194,16 @@ class Parser:
         """
         Get a value:
 
-        ``value := key EQUAL str; str := LBRACE CHAR* RBRACE  | SQUOTE CHAR* SQUOTE | DQUOTE CHAR* DQUOTE``
+        ```
+        value := key EQUAL str ;
+        str := LBRACE CHAR* RBRACE | SQUOTE CHAR* SQUOTE | DQUOTE CHAR* DQUOTE ;
+        ```
 
-        (with ``CHAR`` being almost anything)
+        (with `CHAR` being almost anything)
         """
+
+        if self.current_token.type in [TokenType.COMMA, TokenType.RCBRACE]:  # empty value, skip
+            return '', ''
 
         # get key
         key = ''

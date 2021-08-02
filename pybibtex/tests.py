@@ -10,6 +10,11 @@ class ParserTestCase(unittest.TestCase):
     def parse_val(text) -> Tuple[str, str]:
         return P.Parser(text).value()
 
+    def test_parse_empty(self):
+        key, val = self.parse_val(',')
+        self.assertEqual(key, '')
+        self.assertEqual(val, '')
+
     def test_parse_value_squote(self):
         item_key, item_val = 'abc', 'de f'
         key, val = self.parse_val("{} = '{}'".format(item_key, item_val))
