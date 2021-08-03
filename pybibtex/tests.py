@@ -90,8 +90,8 @@ class ParserTestCase(unittest.TestCase):
         self.assertIn(item_name, result.db)
 
         item = result.db[item_name]
-        self.assertEqual(item.key, item_name)
-        self.assertEqual(item.entry_type, item_type)
+        self.assertEqual(item.cite_key, item_name)
+        self.assertEqual(item.item_type, item_type)
         self.assertTrue(len(item.fields) == 0)
 
     def test_parse_one_item_parenthesis(self):
@@ -131,8 +131,8 @@ class ParserTestCase(unittest.TestCase):
         self.assertIn(item_name, result.db)
 
         item = result.db[item_name]
-        self.assertEqual(item.key, item_name)
-        self.assertEqual(item.entry_type, item_type)
+        self.assertEqual(item.cite_key, item_name)
+        self.assertEqual(item.item_type, item_type)
         self.assertTrue(len(item.fields) == 2)
         self.assertIn(item_k1_key, item.fields)
         self.assertEqual(item.fields[item_k1_key], item_k1_value)
@@ -151,8 +151,8 @@ class ParserTestCase(unittest.TestCase):
         result = self.parse(database)
 
         self.assertTrue(len(result.db) == 2)
-        self.assertEqual(result.db[item1_name].entry_type, item1_type)
-        self.assertEqual(result.db[item2_name].entry_type, item2_type)
+        self.assertEqual(result.db[item1_name].item_type, item1_type)
+        self.assertEqual(result.db[item2_name].item_type, item2_type)
 
     def test_two_items_noval_and_comment(self):
         item1_type = 'article'
@@ -165,8 +165,8 @@ class ParserTestCase(unittest.TestCase):
 
         result = self.parse(database)
         self.assertTrue(len(result.db) == 2)
-        self.assertEqual(result.db[item1_name].entry_type, item1_type)
-        self.assertEqual(result.db[item2_name].entry_type, item2_type)
+        self.assertEqual(result.db[item1_name].item_type, item1_type)
+        self.assertEqual(result.db[item2_name].item_type, item2_type)
 
     def test_one_item_atcomment_one_item(self):
         item1_type = 'article'
@@ -179,8 +179,8 @@ class ParserTestCase(unittest.TestCase):
 
         result = self.parse(database)
         self.assertTrue(len(result.db) == 2)
-        self.assertEqual(result.db[item1_name].entry_type, item1_type)
-        self.assertEqual(result.db[item2_name].entry_type, item2_type)
+        self.assertEqual(result.db[item1_name].item_type, item1_type)
+        self.assertEqual(result.db[item2_name].item_type, item2_type)
 
 
 class ParserStringTestCase(unittest.TestCase):

@@ -90,6 +90,7 @@ class ParserSyntaxError(Exception):
 
 IS_LITERAL = re.compile(r'[a-zA-Z0-9_]')
 IS_LITERAL_BEG = re.compile(r'[a-zA-Z_]')
+IS_KEY = re.compile(r'[a-zA-Z0-9_\-:]')
 
 
 class Parser:
@@ -139,7 +140,13 @@ class Parser:
         return self.database()
 
     def literal(self) -> str:
-        """Get a literal, as `[a-aA-Z_][a-zA-Z0-9_]*`
+        """Get a literal, as
+
+        ```
+        literal := [a-aA-Z_] [a-zA-Z0-9_]*
+        ```
+
+        Note: it cannot start by an integer, for obvious reasons.
         """
 
         if self.current_token.type != TokenType.CHAR or not IS_LITERAL_BEG.match(self.current_token.value):
@@ -154,7 +161,45 @@ class Parser:
 
         return literal
 
+    def key(self) -> str:
+        """Get a key,
+
+        ```
+        key := [a-zA-Z0-9_\\-:]*
+        ```
+
+        Note: that means that a key can start by an integer or `:` (that should not be a problem)
+        """
+
+        if self.current_token.type != TokenType.CHAR or not IS_KEY.match(self.current_token.value):
+            raise ParserSyntaxError('expected literal, got {}'.format(self.current_token))
+
+        citekey = ''
+
+        while self.current_token.type == TokenType.CHAR and IS_KEY.match(self.current_token.value):
+            citekey += self.current_token.value
+            self.next()
+
+        return citekey
+
     def database(self) -> Database:
+        """
+        The BibTeX format is more or less defined as
+
+        ```
+        bibtex := (item | string_var | comment)*;
+        ```
+
+        with
+
+        ```
+        string_var := AT 'string' (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;
+        item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;
+        comment := (AT 'comment' CHAR* NL | CHAR*)
+        ```
+
+        (it is missing the `@preamble`).
+        """
 
         db = {}
         self.skip_any_but_item()  # go to the next @
@@ -184,10 +229,10 @@ class Parser:
 
                 # go inside
                 if item_type.lower() == 'string':
-                    self.string_var()
+                    self.inside_string_var()
                 else:
-                    item = self.item(item_type)
-                    db[item.key] = item
+                    item = self.inside_item(item_type)
+                    db[item.cite_key.lower()] = item
 
                 self.skip_empty()
                 self.eat(closing)
@@ -204,12 +249,14 @@ class Parser:
         while self.current_token.type not in [TokenType.NL, TokenType.EOS]:
             self.next()
 
-    def string_var(self):
+    def inside_string_var(self):
         """Defines a string variable:
 
         ```
         inside_string_var := key EQUAL value ;
         ```
+
+        Note: `key` is maybe a bit broadly defined (is `:` valid?)
         """
 
         # get placeholder
@@ -224,7 +271,7 @@ class Parser:
         value = self.value()
         self.string_variables[placeholder] = value
 
-    def item(self, item_type: str) -> Item:
+    def inside_item(self, item_type: str) -> Item:
         """Get an item:
 
         ```
@@ -233,7 +280,7 @@ class Parser:
         """
 
         # get key
-        item_key = self.literal()
+        item_citekey = self.key()
 
         # eat COMMA
         self.skip_empty()
@@ -254,7 +301,7 @@ class Parser:
             try:
                 k, v = self.field()
             except ParserSyntaxError as e:
-                raise ParserSyntaxError('while parsing {}, {}'.format(item_key, e))
+                raise ParserSyntaxError('while parsing {}, {}'.format(item_citekey, e))
 
             fields[k] = v
 
@@ -265,7 +312,7 @@ class Parser:
                 self.next()
                 self.skip_empty()
 
-        return Item(key=item_key, entry_type=item_type, fields=fields)
+        return Item(cite_key=item_citekey, item_type=item_type, fields=fields)
 
     def field(self) -> Tuple[str, str]:
         """
@@ -276,11 +323,8 @@ class Parser:
         ```
         """
 
-        # get key (key is more broad than a literal, since it can contains things like dash)
-        key = ''
-        while self.current_token.type == TokenType.CHAR:
-            key += self.current_token.value
-            self.next()
+        # get key
+        key = self.key()
 
         # eat EQUAL
         self.skip_empty()
@@ -323,6 +367,8 @@ class Parser:
         Which means that braces **must** match, even in quote.
         
         ```
+        INTEGER := [0-9]
+
         sl := CHAR*
            | QUOTE
            | LBRACE sl* RBRACE
