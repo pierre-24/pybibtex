@@ -8,26 +8,12 @@ class ParserTestCase(unittest.TestCase):
 
     @staticmethod
     def parse_val(text) -> Tuple[str, str]:
-        return P.Parser(text).value()
+        return P.Parser(text).field()
 
     def test_parse_empty(self):
         key, val = self.parse_val(',')
         self.assertEqual(key, '')
         self.assertEqual(val, '')
-
-    def test_parse_value_squote(self):
-        item_key, item_val = 'abc', 'de f'
-        key, val = self.parse_val("{} = '{}'".format(item_key, item_val))
-
-        self.assertEqual(item_key, key)
-        self.assertEqual(item_val, val)
-
-    def test_parse_value_squote_escaped(self):
-        item_key, item_val = 'abc', "de\\' f"
-        key, val = self.parse_val("{} = '{}'".format(item_key, item_val))
-
-        self.assertEqual(item_key, key)
-        self.assertEqual(item_val, val)
 
     def test_parse_value_dquote(self):
         item_key, item_val = 'abc', 'de f'
@@ -74,8 +60,8 @@ class ParserTestCase(unittest.TestCase):
 
         item = result.db[item_name]
         self.assertEqual(item.key, item_name)
-        self.assertEqual(item.item_type, item_type)
-        self.assertTrue(len(item.values) == 0)
+        self.assertEqual(item.entry_type, item_type)
+        self.assertTrue(len(item.fields) == 0)
 
     def test_parse_one_item_multival(self):
         item_type = 'article'
@@ -95,12 +81,12 @@ class ParserTestCase(unittest.TestCase):
 
         item = result.db[item_name]
         self.assertEqual(item.key, item_name)
-        self.assertEqual(item.item_type, item_type)
-        self.assertTrue(len(item.values) == 2)
-        self.assertIn(item_k1_key, item.values)
-        self.assertEqual(item.values[item_k1_key], item_k1_value)
-        self.assertIn(item_k2_key, item.values)
-        self.assertEqual(item.values[item_k2_key], item_k2_value)
+        self.assertEqual(item.entry_type, item_type)
+        self.assertTrue(len(item.fields) == 2)
+        self.assertIn(item_k1_key, item.fields)
+        self.assertEqual(item.fields[item_k1_key], item_k1_value)
+        self.assertIn(item_k2_key, item.fields)
+        self.assertEqual(item.fields[item_k2_key], item_k2_value)
 
     def test_two_items_noval(self):
         item1_type = 'article'
@@ -109,6 +95,19 @@ class ParserTestCase(unittest.TestCase):
         item2_name = 'test2'
 
         database = '@{}{{{}, }} @{}{{{}, }}'.format(
+            item1_type, item1_name, item2_type, item2_name)
+
+        result = self.parse(database)
+
+        self.assertTrue(len(result.db) == 2)
+
+    def test_two_items_noval_and_comment(self):
+        item1_type = 'article'
+        item1_name = 'test1'
+        item2_type = 'book'
+        item2_name = 'test2'
+
+        database = '@{}{{{}, }} this is a comment !!! @{}{{{}, }}'.format(
             item1_type, item1_name, item2_type, item2_name)
 
         result = self.parse(database)

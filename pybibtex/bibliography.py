@@ -2,10 +2,13 @@ from typing import Dict
 
 
 class Item:
-    def __init__(self, key: str, item_type: str = 'article', values: dict = None):
-        self.key = key
-        self.item_type = item_type
-        self.values = values
+    def __init__(self, key: str, entry_type: str = 'article', fields: dict = None):
+        self.key = key.lower()
+        self.entry_type = entry_type.lower()
+        self.fields = fields
+
+    def __repr__(self):
+        return "Item('{}', '{}')".format(self.key, self.entry_type)
 
 
 class Database:

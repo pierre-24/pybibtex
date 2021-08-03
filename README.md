@@ -1,0 +1,1 @@
+Note: BibTeX syntax is described in more details [here](https://www.bibtex.com/g/bibtex-format/) (with some quirks [here](http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html)).

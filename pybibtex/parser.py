@@ -9,13 +9,11 @@ class TokenType(Enum):
     BACKSLASH = '\\'
     LCBRACE = '{'
     RCBRACE = '}'
-    PERCENT = '%'
     SPACE = 'SPC'
     NL = 'NWL'
     EOS = '\0'
     CHAR = 'CHR'
     AT = '@'
-    SQUOTE = '\''
     DQUOTE = '"'
     COMMA = 'CMA'
     EQUAL = '='
@@ -25,12 +23,10 @@ SYMBOL_TR = {
     '\\': TokenType.BACKSLASH,
     '{': TokenType.LCBRACE,
     '}': TokenType.RCBRACE,
-    '%': TokenType.PERCENT,
     ' ': TokenType.SPACE,
     '@': TokenType.AT,
     '\t': TokenType.SPACE,
     '\n': TokenType.NL,
-    '\'': TokenType.SQUOTE,
     '"': TokenType.DQUOTE,
     ',': TokenType.COMMA,
     '=': TokenType.EQUAL
@@ -102,14 +98,9 @@ class Parser:
             self.current_token = Token(TokenType.EOS, '\0')
 
     def next(self):
-        """Get next token, but skip comment"""
+        """Get next token"""
 
         self._next()
-
-        if self.current_token.type == TokenType.PERCENT:
-            self.next()
-            while self.current_token.type not in [TokenType.NL, TokenType.EOS]:
-                self._next()
 
     def eat(self, typ: TokenType):
         if self.current_token.type == typ:
@@ -124,15 +115,25 @@ class Parser:
         while self.current_token.type in [TokenType.SPACE, TokenType.NL]:
             self.next()
 
+    def skip_any_but_item(self):
+        """Skip anything between two items, since it is considered to be a comment
+        """
+
+        while self.current_token.type not in [TokenType.AT, TokenType.EOS]:
+            self.next()
+
     def parse(self) -> Database:
         return self.database()
 
     def database(self) -> Database:
 
         db = {}
+        self.skip_any_but_item()
+
         while self.current_token.type != TokenType.EOS:
             item = self.item()
             db[item.key] = item
+            self.skip_any_but_item()
 
         self.eat(TokenType.EOS)
         return Database(db)
@@ -141,11 +142,10 @@ class Parser:
         """Get an item:
 
         ```
-        item := AT item_type LBRRACE key COMMA (value (COMMA value)*)? COMMA? RBRACE ;
+        item := AT item_type LBRRACE key COMMA (field (COMMA field)*)? COMMA? RBRACE ;
         ```
         """
 
-        self.skip_empty()
         self.eat(TokenType.AT)
 
         # get type
@@ -173,7 +173,7 @@ class Parser:
             self.skip_empty()
 
             try:
-                k, v = self.value()
+                k, v = self.field()
             except ParserSyntaxError as e:
                 raise ParserSyntaxError('while parsing {}, {}'.format(item_key, e))
 
@@ -188,14 +188,14 @@ class Parser:
 
         self.eat(TokenType.RCBRACE)
 
-        return Item(key=item_key, item_type=item_type, values=values)
+        return Item(key=item_key, entry_type=item_type, fields=values)
 
-    def value(self) -> Tuple[str, str]:
+    def field(self) -> Tuple[str, str]:
         """
-        Get a value:
+        Get a field:
 
         ```
-        value := key EQUAL str ;
+        field := key EQUAL str ;
         str := LBRACE CHAR* RBRACE | SQUOTE CHAR* SQUOTE | DQUOTE CHAR* DQUOTE ;
         ```
 
@@ -217,15 +217,14 @@ class Parser:
         self.skip_empty()
 
         # get value
-        if self.current_token.type not in [TokenType.LCBRACE, TokenType.SQUOTE, TokenType.DQUOTE]:
+        if self.current_token.type not in [TokenType.LCBRACE, TokenType.DQUOTE]:
             raise ParserSyntaxError('expected string opening while parsing {}, got {}'.format(key, self.current_token))
 
         opening_char = self.current_token.type
-        closing_char = opening_char if opening_char != TokenType.LCBRACE else TokenType.RCBRACE
         self.next()
 
         value = ''
-        brace_level = 1 if closing_char == TokenType.RCBRACE else 0
+        brace_level = 1 if opening_char == TokenType.LCBRACE else 0
         while True:
             if self.current_token.type == TokenType.BACKSLASH:  # escape next character, whatever it is
                 self.next()
@@ -236,10 +235,12 @@ class Parser:
                 brace_level += 1
             elif self.current_token.type == TokenType.RCBRACE:
                 brace_level -= 1
-                if closing_char == TokenType.RCBRACE and brace_level == 0:
+                if opening_char == TokenType.LCBRACE and brace_level == 0:
                     self.next()
                     break
-            elif self.current_token.type == closing_char:
+            elif self.current_token.type == TokenType.DQUOTE:
+                if brace_level != 0:
+                    raise ParserSyntaxError('unmatched braces while parsing {}'.format(key))
                 self.next()
                 break
 
