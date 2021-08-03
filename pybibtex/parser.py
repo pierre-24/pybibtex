@@ -152,25 +152,48 @@ class Parser:
         self.skip_any_but_item()  # go to the next @
 
         while self.current_token.type != TokenType.EOS:
-            item = self.item()
-            db[item.key] = item
+            self.eat(TokenType.AT)
+
+            # get type
+            item_type = self.literal()
+
+            if item_type.lower() == 'string':
+                pass
+            elif item_type.lower() == 'comment':
+                self.comment()
+            else:
+                item = self.item(item_type)
+                db[item.key] = item
+
             self.skip_any_but_item()
 
         self.eat(TokenType.EOS)
         return Database(db)
 
-    def item(self) -> Item:
-        """Get an item:
+    def comment(self):
+        """Skip whatever remains of the line
+        """
+
+        while self.current_token.type not in [TokenType.NL, TokenType.EOS]:
+            self.next()
+
+    def string_var(self) -> Tuple[str, str]:
+        """Get a string variable:
 
         ```
-        item := AT item_type LBRRACE key COMMA (field (COMMA field)*)? COMMA? RBRACE ;
+        string_var := AT 'string' LCBRACE key EQUAL string RCBRACE
         ```
         """
 
-        self.eat(TokenType.AT)
+    def item(self, item_type: str) -> Item:
+        """Get an item:
 
-        # get type
-        item_type = self.literal()
+        ```
+        item := AT item_type LCBRRACE key COMMA (field (COMMA field)*)? COMMA? RBRACE ;
+        ```
+
+        Note: assume that the `item_type` is already read, expects `LCBRACE`
+        """
 
         # enter element
         self.skip_empty()
@@ -210,8 +233,7 @@ class Parser:
         Get a field:
 
         ```
-        field := key EQUAL str ;
-        str := LBRACE CHAR* RBRACE | SQUOTE CHAR* SQUOTE | DQUOTE CHAR* DQUOTE ;
+        field := key EQUAL str
         ```
 
         (with `CHAR` being almost anything)

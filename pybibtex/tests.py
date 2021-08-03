@@ -92,6 +92,17 @@ class ParserTestCase(unittest.TestCase):
         self.assertEqual(item.entry_type, item_type)
         self.assertTrue(len(item.fields) == 0)
 
+    def test_parse_one_item_and_comment(self):
+        item_type = 'article'
+        item_name = 'test'
+
+        database = '@{}{{{}, }}  @comment{{\nwhatever}}'.format(
+            item_type, item_name)
+        result = self.parse(database)
+
+        self.assertTrue(len(result.db) == 1)
+        self.assertIn(item_name, result.db)
+
     def test_parse_one_item_multival(self):
         item_type = 'article'
         item_name = 'test'
@@ -129,6 +140,8 @@ class ParserTestCase(unittest.TestCase):
         result = self.parse(database)
 
         self.assertTrue(len(result.db) == 2)
+        self.assertEqual(result.db[item1_name].entry_type, item1_type)
+        self.assertEqual(result.db[item2_name].entry_type, item2_type)
 
     def test_two_items_noval_and_comment(self):
         item1_type = 'article'
@@ -140,5 +153,20 @@ class ParserTestCase(unittest.TestCase):
             item1_type, item1_name, item2_type, item2_name)
 
         result = self.parse(database)
-
         self.assertTrue(len(result.db) == 2)
+        self.assertEqual(result.db[item1_name].entry_type, item1_type)
+        self.assertEqual(result.db[item2_name].entry_type, item2_type)
+
+    def test_one_item_atcomment_one_item(self):
+        item1_type = 'article'
+        item1_name = 'test1'
+        item2_type = 'book'
+        item2_name = 'test2'
+
+        database = '@{}{{{}, }}\n@comment{{whatever @article{{\n fits your boat }} @{}{{{}, }}'.format(
+            item1_type, item1_name, item2_type, item2_name)
+
+        result = self.parse(database)
+        self.assertTrue(len(result.db) == 2)
+        self.assertEqual(result.db[item1_name].entry_type, item1_type)
+        self.assertEqual(result.db[item2_name].entry_type, item2_type)
