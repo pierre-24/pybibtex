@@ -10,7 +10,7 @@ class Item:
         self.item_type = item_type.lower()
         self.fields = fields
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Item('{}', '{}')".format(self.cite_key, self.item_type)
 
     def __getitem__(self, item: str) -> str:
@@ -18,6 +18,15 @@ class Item:
 
     def __contains__(self, item: str) -> bool:
         return item in self.fields
+
+    def __str__(self) -> str:
+        """Outputs bibtex item
+        """
+
+        return '@{}{{{},\n  {}\n}}'.format(
+            self.item_type,
+            self.cite_key,
+            ',\n  '.join('{} = "{}"'.format(k, v) for k, v in self.fields.items()))
 
 
 class Database:
@@ -34,3 +43,12 @@ class Database:
 
     def __contains__(self, item) -> bool:
         return item.lower() in self.db
+
+    def __repr__(self):
+        return ', '.join('@{}({})'.format(i.item_type, i.cite_key) for i in self.db.values())
+
+    def __str__(self) -> str:
+        """Outputs bibtex database
+        """
+
+        return '\n'.join(str(item) for item in self.db.values())

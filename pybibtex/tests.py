@@ -182,6 +182,23 @@ class ParserTestCase(unittest.TestCase):
         self.assertEqual(result.db[item1_name].item_type, item1_type)
         self.assertEqual(result.db[item2_name].item_type, item2_type)
 
+    def test_output(self):
+        db1 = self.parse('@misc(item1, key = {val{u}e}) @misc(item2, key = "valu{"}e{"}")')
+        db2 = self.parse(str(db1))
+
+        # test if output is equals to input after parse
+        self.assertEqual(len(db1.db), len(db2.db))
+
+        for i1 in db1.db.values():
+            self.assertIn(i1.cite_key, db2)
+            i2 = db2[i1.cite_key]
+
+            self.assertEqual(i1.item_type, i2.item_type)
+
+            for k1 in i1.fields:
+                self.assertIn(k1, i2.fields)
+                self.assertEqual(i1.fields[k1], i2.fields[k1])
+
 
 class ParserStringTestCase(unittest.TestCase):
     @staticmethod

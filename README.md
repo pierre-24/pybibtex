@@ -1,10 +1,10 @@
 # `pybibtex`: a (very) simple BibTeX parser
 
 Provides a Python API to parse BibTeX files.
-Not to be confused with the (actual) [`pybibtex`](https://github.com/rasbt/pybibtex): this one is a more clever approach (this is actual syntax parsing, see [there](./pybibtex/parser.py)), but it does not contains any tools (yet?).
+Not to be confused with the (actual) [`pybibtex`](https://github.com/rasbt/pybibtex): while this implementation is a more clever approach (this is actual syntax parsing, see [there](./pybibtex/parser.py)), but it does not provide any tools (yet?).
 
-**Note:** BibTeX syntax is described simply [there](https://www.bibtex.com/g/bibtex-format/) and with more details in [`btxdoc`](https://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/) (some of its quirks are examplified [here](http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html)).
-This version handles the different syntax for the items (braces or parentheses) and the concatenation (with the `@string` definition).
+**Note:** BibTeX syntax is introduced, simply, [there](https://www.bibtex.com/g/bibtex-format/) and with more details in [`btxdoc`](https://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/) (and some of its quirks are examplified [here](http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html)).
+This implementation handles the different syntax for the items (braces or parentheses), the comments, and the concatenation (with the `@string` definitions).
 
 
 ## Install & use
