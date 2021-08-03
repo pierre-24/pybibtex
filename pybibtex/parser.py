@@ -10,6 +10,8 @@ class TokenType(Enum):
     BACKSLASH = '\\'
     LCBRACE = '{'
     RCBRACE = '}'
+    LPAR= '('
+    RPAR = ')'
     SPACE = 'SPC'
     NL = 'NWL'
     EOS = '\0'
@@ -20,10 +22,14 @@ class TokenType(Enum):
     EQUAL = '='
 
 
+OPENINGS = (TokenType.LPAR, TokenType.LCBRACE)
+
 SYMBOL_TR = {
     '\\': TokenType.BACKSLASH,
     '{': TokenType.LCBRACE,
     '}': TokenType.RCBRACE,
+    '(': TokenType.LPAR,
+    ')': TokenType.RPAR,
     ' ': TokenType.SPACE,
     '@': TokenType.AT,
     '\t': TokenType.SPACE,
@@ -158,14 +164,33 @@ class Parser:
 
             # get type
             item_type = self.literal()
+            self.skip_empty()
 
-            if item_type.lower() == 'string':
-                self.string_var()
-            elif item_type.lower() == 'comment':
+            if item_type.lower() == 'comment':
                 self.comment()
             else:
-                item = self.item(item_type)
-                db[item.key] = item
+                # get opening
+                if self.current_token.type not in OPENINGS:
+                    raise ParserSyntaxError('expected OPENINGS, got {}'.format(self.current_token))
+
+                opening = self.current_token.type
+                closing = {
+                    TokenType.LPAR: TokenType.RPAR,
+                    TokenType.LCBRACE: TokenType.RCBRACE
+                }[opening]
+
+                self.next()
+                self.skip_empty()
+
+                # go inside
+                if item_type.lower() == 'string':
+                    self.string_var()
+                else:
+                    item = self.item(item_type)
+                    db[item.key] = item
+
+                self.skip_empty()
+                self.eat(closing)
 
             self.skip_any_but_item()
 
@@ -183,15 +208,9 @@ class Parser:
         """Defines a string variable:
 
         ```
-        string_var := AT 'string' LCBRACE key EQUAL string RCBRACE ;
+        inside_string_var := key EQUAL string ;
         ```
-
-        Note: assume that the `'string'` is already read, expects `LCBRACE`
         """
-
-        # enter element
-        self.skip_empty()
-        self.eat(TokenType.LCBRACE)
 
         # get placeholder
         placeholder = self.literal()
@@ -201,57 +220,52 @@ class Parser:
         self.eat(TokenType.EQUAL)
         self.skip_empty()
 
-        # get value
+        # get value and define
         value = self.value()
-
-        # define and leave!
-        self.skip_empty()
-        self.eat(TokenType.RCBRACE)
-
         self.string_variables[placeholder] = value
 
     def item(self, item_type: str) -> Item:
         """Get an item:
 
         ```
-        item := AT item_type LCBRRACE key COMMA (field (COMMA field)*)? COMMA? RBRACE ;
+        inside_item := key COMMA (field (COMMA field)*)? COMMA?
         ```
-
-        Note: assume that the `item_type` is already read, expects `LCBRACE`
         """
-
-        # enter element
-        self.skip_empty()
-        self.eat(TokenType.LCBRACE)
 
         # get key
         item_key = self.literal()
 
+        # eat COMMA
         self.skip_empty()
         self.eat(TokenType.COMMA)
+        self.skip_empty()
 
-        # get values
-        values = {}
+        # get fields
+        fields = {}
         while True:
-            self.skip_empty()
+
+            if self.current_token.type == TokenType.COMMA:  # empty value, skip
+                self.next()
+                continue
+
+            elif self.current_token.type in [TokenType.RCBRACE, TokenType.RPAR]:  # that's the end of it!
+                break
 
             try:
                 k, v = self.field()
             except ParserSyntaxError as e:
                 raise ParserSyntaxError('while parsing {}, {}'.format(item_key, e))
 
-            if k:
-                values[k] = v
+            fields[k] = v
 
             self.skip_empty()
             if self.current_token.type != TokenType.COMMA:
                 break
             else:
                 self.next()
+                self.skip_empty()
 
-        self.eat(TokenType.RCBRACE)
-
-        return Item(key=item_key, entry_type=item_type, fields=values)
+        return Item(key=item_key, entry_type=item_type, fields=fields)
 
     def field(self) -> Tuple[str, str]:
         """
@@ -260,12 +274,7 @@ class Parser:
         ```
         field := key EQUAL value ;
         ```
-
-        (with `CHAR` being almost anything)
         """
-
-        if self.current_token.type in [TokenType.COMMA, TokenType.RCBRACE]:  # empty value, skip
-            return '', ''
 
         # get key (key is more broad than a literal, since it can contains things like dash)
         key = ''
@@ -282,7 +291,7 @@ class Parser:
         return key, self.value()
 
     def value(self) -> str:
-        """A value is either a string or an int. Actually only covers strings!
+        """A value is either a string or an int. Currently, only strings!
 
         ```
         value := INTEGER INTEGER*

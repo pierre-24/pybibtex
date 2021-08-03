@@ -38,11 +38,6 @@ class FieldTestCase(unittest.TestCase):
     def parse_field(text) -> Tuple[str, str]:
         return P.Parser(text).field()
 
-    def test_parse_empty(self):
-        key, val = self.parse_field(',')
-        self.assertEqual(key, '')
-        self.assertEqual(val, '')
-
     def test_parse_value_dquote(self):
         item_key, item_val = 'abc', 'de f'
         key, val = self.parse_field('{} = "{}"'.format(item_key, item_val))
@@ -81,8 +76,7 @@ class ParserTestCase(unittest.TestCase):
         item_type = 'article'
         item_name = 'test'
 
-        database = '@{}{{{}, }}'.format(
-            item_type, item_name)
+        database = '@{}{{{}, }}'.format(item_type, item_name)
         result = self.parse(database)
 
         self.assertTrue(len(result.db) == 1)
@@ -92,6 +86,15 @@ class ParserTestCase(unittest.TestCase):
         self.assertEqual(item.key, item_name)
         self.assertEqual(item.entry_type, item_type)
         self.assertTrue(len(item.fields) == 0)
+
+    def test_parse_one_item_parenthesis(self):
+        item_type = 'article'
+        item_name = 'test'
+
+        database = '@{}({}, )'.format(item_type, item_name)
+
+        result = self.parse(database)
+        self.assertTrue(len(result.db) == 1)
 
     def test_parse_one_item_and_comment(self):
         item_type = 'article'
