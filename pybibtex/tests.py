@@ -2,6 +2,7 @@ import unittest
 from typing import Tuple
 
 import pybibtex.parser as P
+from pybibtex.bibliography import Database
 
 
 class LiteralTestCase(unittest.TestCase):
@@ -170,3 +171,20 @@ class ParserTestCase(unittest.TestCase):
         self.assertTrue(len(result.db) == 2)
         self.assertEqual(result.db[item1_name].entry_type, item1_type)
         self.assertEqual(result.db[item2_name].entry_type, item2_type)
+
+
+class ParserStringTestCase(unittest.TestCase):
+    @staticmethod
+    def parse(text) -> Tuple[Database, dict]:
+        parser = P.Parser(text)
+        db = parser.parse()
+
+        return db, parser.string_variables
+
+    def test_string_def(self):
+        key = 'tmp'
+        val = 'xyz'
+
+        db, defs = self.parse('@string{{{} = "{}"}}'.format(key, val))
+
+        self.assertEqual(defs[key], val)

@@ -92,6 +92,8 @@ class Parser:
         self.tokenizer = self.lexer.tokenize()
         self.current_token: Token = None
 
+        self.string_variables = {}
+
         self.next()
 
     def _next(self):
@@ -158,7 +160,7 @@ class Parser:
             item_type = self.literal()
 
             if item_type.lower() == 'string':
-                pass
+                self.string_var()
             elif item_type.lower() == 'comment':
                 self.comment()
             else:
@@ -177,13 +179,36 @@ class Parser:
         while self.current_token.type not in [TokenType.NL, TokenType.EOS]:
             self.next()
 
-    def string_var(self) -> Tuple[str, str]:
-        """Get a string variable:
+    def string_var(self):
+        """Defines a string variable:
 
         ```
-        string_var := AT 'string' LCBRACE key EQUAL string RCBRACE
+        string_var := AT 'string' LCBRACE key EQUAL string RCBRACE ;
         ```
+
+        Note: assume that the `'string'` is already read, expects `LCBRACE`
         """
+
+        # enter element
+        self.skip_empty()
+        self.eat(TokenType.LCBRACE)
+
+        # get placeholder
+        placeholder = self.literal()
+
+        # eat EQUAL
+        self.skip_empty()
+        self.eat(TokenType.EQUAL)
+        self.skip_empty()
+
+        # get value
+        value = self.value()
+
+        # define and leave!
+        self.skip_empty()
+        self.eat(TokenType.RCBRACE)
+
+        self.string_variables[placeholder] = value
 
     def item(self, item_type: str) -> Item:
         """Get an item:
@@ -233,7 +258,7 @@ class Parser:
         Get a field:
 
         ```
-        field := key EQUAL str
+        field := key EQUAL value ;
         ```
 
         (with `CHAR` being almost anything)
@@ -253,9 +278,22 @@ class Parser:
         self.eat(TokenType.EQUAL)
         self.skip_empty()
 
-        # get value
+        # get value and return
+        return key, self.value()
+
+    def value(self) -> str:
+        """A value is either a string or an int. Actually only covers strings!
+
+        ```
+        value := INTEGER INTEGER*
+              | LCBRACE CHAR* RCBRACE
+              | DQUOTE CHAR* DQUOTE
+              ;
+        ```
+        """
+
         if self.current_token.type not in [TokenType.LCBRACE, TokenType.DQUOTE]:
-            raise ParserSyntaxError('expected string opening while parsing {}, got {}'.format(key, self.current_token))
+            raise ParserSyntaxError('expected string, got {}'.format(self.current_token))
 
         opening_char = self.current_token.type
         self.next()
@@ -284,4 +322,4 @@ class Parser:
             value += self.current_token.value
             self.next()
 
-        return key, value
+        return value
