@@ -1,5 +1,6 @@
 from typing import Tuple, Iterator
 from enum import Enum, unique
+import re
 
 from bibliography import Database, Item
 
@@ -81,6 +82,10 @@ class ParserSyntaxError(Exception):
     pass
 
 
+IS_LITERAL = re.compile(r'[a-zA-Z0-9_]')
+IS_LITERAL_BEG = re.compile(r'[a-zA-Z_]')
+
+
 class Parser:
     def __init__(self, inp: str):
         self.lexer = Lexer(inp)
@@ -116,7 +121,7 @@ class Parser:
             self.next()
 
     def skip_any_but_item(self):
-        """Skip anything between two items, since it is considered to be a comment
+        """Skip anything until the next @, since it is considered to be a comment
         """
 
         while self.current_token.type not in [TokenType.AT, TokenType.EOS]:
@@ -125,10 +130,26 @@ class Parser:
     def parse(self) -> Database:
         return self.database()
 
+    def literal(self) -> str:
+        """Get a literal, as `[a-aA-Z_][a-zA-Z0-9_]*`
+        """
+
+        if self.current_token.type != TokenType.CHAR or not IS_LITERAL_BEG.match(self.current_token.value):
+            raise ParserSyntaxError('expected literal, got {}'.format(self.current_token))
+
+        literal = self.current_token.value
+        self.next()
+
+        while self.current_token.type == TokenType.CHAR and IS_LITERAL.match(self.current_token.value):
+            literal += self.current_token.value
+            self.next()
+
+        return literal
+
     def database(self) -> Database:
 
         db = {}
-        self.skip_any_but_item()
+        self.skip_any_but_item()  # go to the next @
 
         while self.current_token.type != TokenType.EOS:
             item = self.item()
@@ -149,20 +170,14 @@ class Parser:
         self.eat(TokenType.AT)
 
         # get type
-        item_type = ''
-        while self.current_token.type == TokenType.CHAR:
-            item_type += self.current_token.value
-            self.next()
+        item_type = self.literal()
 
         # enter element
         self.skip_empty()
         self.eat(TokenType.LCBRACE)
 
         # get key
-        item_key = ''
-        while self.current_token.type == TokenType.CHAR:
-            item_key += self.current_token.value
-            self.next()
+        item_key = self.literal()
 
         self.skip_empty()
         self.eat(TokenType.COMMA)
@@ -205,7 +220,7 @@ class Parser:
         if self.current_token.type in [TokenType.COMMA, TokenType.RCBRACE]:  # empty value, skip
             return '', ''
 
-        # get key
+        # get key (key is more broad than a literal, since it can contains things like dash)
         key = ''
         while self.current_token.type == TokenType.CHAR:
             key += self.current_token.value

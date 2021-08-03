@@ -4,45 +4,74 @@ from typing import Tuple
 import pybibtex.parser as P
 
 
-class ParserTestCase(unittest.TestCase):
-
+class LiteralTestCase(unittest.TestCase):
     @staticmethod
-    def parse_val(text) -> Tuple[str, str]:
+    def parse_literal(text) -> str:
+        return P.Parser(text).literal()
+
+    def test_parse_alpha_literal(self):
+        lit = 'test'
+        self.assertEqual(self.parse_literal(lit), lit)
+
+    def test_parse_alphanum_literal(self):
+        lit = '_test12'
+        self.assertEqual(self.parse_literal(lit), lit)
+
+    def test_parse_literal_err(self):
+        lit = 'test_12'
+
+        self.assertEqual(self.parse_literal('{} x'.format(lit)), lit)  # space
+        self.assertEqual(self.parse_literal('{}-x'.format(lit)), lit)  # char
+
+        # cannot start by things outside [a-zA-Z_]
+        with self.assertRaises(P.ParserSyntaxError):
+            self.parse_literal('!test')
+
+        # cannot start by a numeric char
+        with self.assertRaises(P.ParserSyntaxError):
+            self.parse_literal('1word')
+
+
+class FieldTestCase(unittest.TestCase):
+    @staticmethod
+    def parse_field(text) -> Tuple[str, str]:
         return P.Parser(text).field()
 
     def test_parse_empty(self):
-        key, val = self.parse_val(',')
+        key, val = self.parse_field(',')
         self.assertEqual(key, '')
         self.assertEqual(val, '')
 
     def test_parse_value_dquote(self):
         item_key, item_val = 'abc', 'de f'
-        key, val = self.parse_val('{} = "{}"'.format(item_key, item_val))
+        key, val = self.parse_field('{} = "{}"'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
 
     def test_parse_value_braced(self):
         item_key, item_val = 'abc', 'de f'
-        key, val = self.parse_val('{} = {{{}}}'.format(item_key, item_val))
+        key, val = self.parse_field('{} = {{{}}}'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
 
     def test_parse_value_braced_escaped(self):
         item_key, item_val = 'abc', 'de\\} f'
-        key, val = self.parse_val('{} = {{{}}}'.format(item_key, item_val))
+        key, val = self.parse_field('{} = {{{}}}'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
 
     def test_parse_value_multi_braced(self):
         item_key, item_val = 'abc', 'd{e} f'
-        key, val = self.parse_val('{} = {{{}}}'.format(item_key, item_val))
+        key, val = self.parse_field('{} = {{{}}}'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
 
+
+class ParserTestCase(unittest.TestCase):
     @staticmethod
     def parse(text):
         return P.Parser(text).parse()
