@@ -13,6 +13,12 @@ class Item:
     def __repr__(self):
         return "Item('{}', '{}')".format(self.cite_key, self.item_type)
 
+    def __getitem__(self, item: str) -> str:
+        return self.fields[item]
+
+    def __contains__(self, item: str) -> bool:
+        return item in self.fields
+
 
 class Database:
     """Database of bibliographic items
@@ -26,5 +32,5 @@ class Database:
     def __getitem__(self, item: str) -> Item:
         return self.db[item.lower()]
 
-    def __contains__(self, item):
-        return item.lower in self.db
+    def __contains__(self, item) -> bool:
+        return item.lower() in self.db

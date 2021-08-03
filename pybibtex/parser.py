@@ -1,15 +1,15 @@
-from typing import Tuple, Iterator, Union
+from typing import Tuple, Iterator
 from enum import Enum, unique
 import re
 
-from bibliography import Database, Item
+from pybibtex.bibliography import Database, Item
 
 
 @unique
 class TokenType(Enum):
     LCBRACE = '{'
     RCBRACE = '}'
-    LPAR= '('
+    LPAR = '('
     RPAR = ')'
     SPACE = 'SPC'
     NL = 'NWL'
@@ -47,7 +47,7 @@ class Token:
         self.position = position
 
     def __repr__(self):
-        return 'Token({}, \'{}\'{})'.format(
+        return "Token({}, '{}'{})".format(
             self.type,
             self.value,
             '' if self.position < 0 else ', {}'.format(self.position)
@@ -365,7 +365,7 @@ class Parser:
 
         Note that for a quote to be escaped, it must be inside braces.
         Which means that braces **must** match, even in quote.
-        
+
         ```
         INTEGER := [0-9]
 
@@ -373,7 +373,7 @@ class Parser:
            | QUOTE
            | LBRACE sl* RBRACE
            ;
-        
+
         string_part := literal
                     | INTEGER INTEGER*
                     | LBRACE sl* RBRACE
