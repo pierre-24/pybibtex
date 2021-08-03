@@ -52,9 +52,9 @@ class FieldTestCase(unittest.TestCase):
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
 
-    def test_parse_value_braced_escaped(self):
-        item_key, item_val = 'abc', 'de\\} f'
-        key, val = self.parse_field('{} = {{{}}}'.format(item_key, item_val))
+    def test_parse_value_dquote_escaped(self):
+        item_key, item_val = 'abc', 'de {"} f'
+        key, val = self.parse_field('{} = "{}"'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
@@ -62,6 +62,13 @@ class FieldTestCase(unittest.TestCase):
     def test_parse_value_multi_braced(self):
         item_key, item_val = 'abc', 'd{e} f'
         key, val = self.parse_field('{} = {{{}}}'.format(item_key, item_val))
+
+        self.assertEqual(item_key, key)
+        self.assertEqual(item_val, val)
+
+    def test_parse_value_int(self):
+        item_key, item_val = 'abc', 3
+        key, val = self.parse_field('{} = {}'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
         self.assertEqual(item_val, val)
@@ -188,6 +195,6 @@ class ParserStringTestCase(unittest.TestCase):
         key = 'tmp'
         val = 'xyz'
 
-        db, defs = self.parse('@string{{{} = "{}"}}'.format(key, val))
+        db, defs = self.parse('@string({} = "{}")'.format(key, val))
 
         self.assertEqual(defs[key], val)

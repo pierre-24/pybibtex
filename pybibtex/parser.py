@@ -1,4 +1,4 @@
-from typing import Tuple, Iterator
+from typing import Tuple, Iterator, Union
 from enum import Enum, unique
 import re
 
@@ -7,7 +7,6 @@ from bibliography import Database, Item
 
 @unique
 class TokenType(Enum):
-    BACKSLASH = '\\'
     LCBRACE = '{'
     RCBRACE = '}'
     LPAR= '('
@@ -25,7 +24,6 @@ class TokenType(Enum):
 OPENINGS = (TokenType.LPAR, TokenType.LCBRACE)
 
 SYMBOL_TR = {
-    '\\': TokenType.BACKSLASH,
     '{': TokenType.LCBRACE,
     '}': TokenType.RCBRACE,
     '(': TokenType.LPAR,
@@ -290,8 +288,11 @@ class Parser:
         # get value and return
         return key, self.value()
 
-    def value(self) -> str:
+    def value(self) -> Union[str, int]:
         """A value is either a string or an int. Currently, only strings!
+
+        Note that for a quote to be escaped, it must be inside braces.
+        Which means that braces **must** match, even in quote.
 
         ```
         value := INTEGER INTEGER*
@@ -301,34 +302,35 @@ class Parser:
         ```
         """
 
-        if self.current_token.type not in [TokenType.LCBRACE, TokenType.DQUOTE]:
-            raise ParserSyntaxError('expected string, got {}'.format(self.current_token))
+        if self.current_token.type == TokenType.CHAR and self.current_token.value.isnumeric():
+            value = 0
 
-        opening_char = self.current_token.type
-        self.next()
+            while self.current_token.type == TokenType.CHAR and self.current_token.value.isnumeric():
+                value = value * 10 + int(self.current_token.value)
+                self.next()
 
-        value = ''
-        brace_level = 1 if opening_char == TokenType.LCBRACE else 0
-        while True:
-            if self.current_token.type == TokenType.BACKSLASH:  # escape next character, whatever it is
-                self.next()
-                value += '\\' + self.current_token.value
-                self.next()
-                continue
-            elif self.current_token.type == TokenType.LCBRACE:
-                brace_level += 1
-            elif self.current_token.type == TokenType.RCBRACE:
-                brace_level -= 1
-                if opening_char == TokenType.LCBRACE and brace_level == 0:
-                    self.next()
-                    break
-            elif self.current_token.type == TokenType.DQUOTE:
-                if brace_level != 0:
-                    raise ParserSyntaxError('unmatched braces while parsing {}'.format(key))
-                self.next()
-                break
-
-            value += self.current_token.value
+        elif self.current_token.type in [TokenType.LCBRACE, TokenType.DQUOTE]:
+            opening_char = self.current_token.type
             self.next()
+
+            value = ''
+            brace_level = 1 if opening_char == TokenType.LCBRACE else 0
+            while True:
+                if self.current_token.type == TokenType.LCBRACE:
+                    brace_level += 1
+                elif self.current_token.type == TokenType.RCBRACE:
+                    brace_level -= 1
+                    if opening_char == TokenType.LCBRACE and brace_level == 0:
+                        self.next()
+                        break
+                elif self.current_token.type == TokenType.DQUOTE:
+                    if opening_char == TokenType.DQUOTE and brace_level == 0:
+                        self.next()
+                        break
+
+                value += self.current_token.value
+                self.next()
+        else:
+            raise ParserSyntaxError('expected string, got {}'.format(self.current_token))
 
         return value
