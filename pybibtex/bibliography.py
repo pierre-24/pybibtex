@@ -16,6 +16,9 @@ class Item:
     def __getitem__(self, item: str) -> str:
         return self.fields[item]
 
+    def __setitem__(self, key, value):
+        self.fields[key] = value
+
     def __contains__(self, item: str) -> bool:
         return item in self.fields
 
