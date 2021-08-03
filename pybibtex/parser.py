@@ -99,7 +99,21 @@ class Parser:
         self.tokenizer = self.lexer.tokenize()
         self.current_token: Token = None
 
-        self.string_variables = {}
+        # month are defined by default
+        self.string_variables = {
+            'jan': 'january',
+            'feb': 'february',
+            'mar': 'march',
+            'apr': 'april',
+            'may': 'may',
+            'jun': 'june',
+            'jul': 'july',
+            'aug': 'august',
+            'sep': 'september',
+            'oct': 'october',
+            'nov': 'november',
+            'dec': 'december'
+        }
 
         self.next()
 
