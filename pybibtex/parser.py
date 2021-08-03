@@ -16,9 +16,10 @@ class TokenType(Enum):
     EOS = '\0'
     CHAR = 'CHR'
     AT = '@'
-    DQUOTE = '"'
+    QUOTE = '"'
     COMMA = 'CMA'
     EQUAL = '='
+    POUND = '#'
 
 
 OPENINGS = (TokenType.LPAR, TokenType.LCBRACE)
@@ -32,9 +33,10 @@ SYMBOL_TR = {
     '@': TokenType.AT,
     '\t': TokenType.SPACE,
     '\n': TokenType.NL,
-    '"': TokenType.DQUOTE,
+    '"': TokenType.QUOTE,
     ',': TokenType.COMMA,
-    '=': TokenType.EQUAL
+    '=': TokenType.EQUAL,
+    '#': TokenType.POUND
 }
 
 
@@ -206,7 +208,7 @@ class Parser:
         """Defines a string variable:
 
         ```
-        inside_string_var := key EQUAL string ;
+        inside_string_var := key EQUAL value ;
         ```
         """
 
@@ -288,28 +290,66 @@ class Parser:
         # get value and return
         return key, self.value()
 
-    def value(self) -> Union[str, int]:
-        """A value is either a string or an int. Currently, only strings!
+    def value(self) -> str:
+        """A value is a string, but different stuffs can be concatenated.
+
+        ```
+        value := string_part (POUND string_part)* ;
+        ```
+
+        Note: it means that integer can be concatenated, deal with it.
+        """
+        value = self.string_part()
+
+        # concatenate?
+        self.skip_empty()
+
+        while self.current_token.type == TokenType.POUND:
+            # eat POUND
+            self.next()
+            self.skip_empty()
+
+            # get next value
+            value += self.string_part()
+            self.skip_empty()
+
+        # ok, done
+        return value
+
+    def string_part(self) -> str:
+        """Get an actual string.
 
         Note that for a quote to be escaped, it must be inside braces.
         Which means that braces **must** match, even in quote.
-
+        
         ```
-        value := INTEGER INTEGER*
-              | LCBRACE CHAR* RCBRACE
-              | DQUOTE CHAR* DQUOTE
-              ;
+        sl := CHAR*
+           | QUOTE
+           | LBRACE sl* RBRACE
+           ;
+        
+        string_part := literal
+                    | INTEGER INTEGER*
+                    | LBRACE sl* RBRACE
+                    | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE
+                    ;
         ```
         """
 
-        if self.current_token.type == TokenType.CHAR and self.current_token.value.isnumeric():
-            value = 0
+        if self.current_token.type == TokenType.CHAR:
+            if self.current_token.value.isnumeric():  # its a pure integer
+                value = ''
+                while self.current_token.type == TokenType.CHAR and self.current_token.value.isnumeric():
+                    value += self.current_token.value
+                    self.next()
+            else:  # ... it is a literal, then
+                lit = self.literal()
+                try:
+                    value = self.string_variables[lit]
+                except KeyError:
+                    raise ParserSyntaxError('{} is not defined'.format(lit))
 
-            while self.current_token.type == TokenType.CHAR and self.current_token.value.isnumeric():
-                value = value * 10 + int(self.current_token.value)
-                self.next()
-
-        elif self.current_token.type in [TokenType.LCBRACE, TokenType.DQUOTE]:
+        elif self.current_token.type in [TokenType.LCBRACE, TokenType.QUOTE]:
             opening_char = self.current_token.type
             self.next()
 
@@ -323,10 +363,12 @@ class Parser:
                     if opening_char == TokenType.LCBRACE and brace_level == 0:
                         self.next()
                         break
-                elif self.current_token.type == TokenType.DQUOTE:
-                    if opening_char == TokenType.DQUOTE and brace_level == 0:
+                elif self.current_token.type == TokenType.QUOTE:
+                    if opening_char == TokenType.QUOTE and brace_level == 0:
                         self.next()
                         break
+                elif self.current_token.type == TokenType.EOS:
+                    raise ParserSyntaxError('got {} while parsing string'.format(self.current_token))
 
                 value += self.current_token.value
                 self.next()

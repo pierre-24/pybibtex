@@ -71,7 +71,7 @@ class FieldTestCase(unittest.TestCase):
         key, val = self.parse_field('{} = {}'.format(item_key, item_val))
 
         self.assertEqual(item_key, key)
-        self.assertEqual(item_val, val)
+        self.assertEqual('{}'.format(item_val), val)
 
 
 class ParserTestCase(unittest.TestCase):
@@ -198,3 +198,26 @@ class ParserStringTestCase(unittest.TestCase):
         db, defs = self.parse('@string({} = "{}")'.format(key, val))
 
         self.assertEqual(defs[key], val)
+
+    def test_string_use(self):
+        key = 'tmp'
+        val = 'xyz'
+
+        db, defs = self.parse('@string({k} = "{v}") @article(whatever, key = {k})'.format(**{'k': key, 'v': val}))
+
+        self.assertEqual(defs[key], val)
+        self.assertEqual(db['whatever'].fields['key'], val)
+
+    def test_string_concatenate(self):
+        key1 = 'tmp'
+        val1 = 'xyz'
+        key2 = '_whatever'
+        val2 = 'abc'
+        val_in = 'efg'
+
+        db, defs = self.parse(
+            '@string({k1} = "{v1}") @string({k2} = "{v2}") @article(whatever, key = {k1} # "{vi}" # {k2})'.format(
+                **{'k1': key1, 'v1': val1, 'k2': key2, 'v2': val2, 'vi': val_in}))
+
+        self.assertEqual(defs[key1], val1)
+        self.assertEqual(db['whatever'].fields['key'], val1 + val_in + val2)
