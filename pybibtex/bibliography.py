@@ -29,7 +29,7 @@ class Item:
         return '@{}{{{},\n  {}\n}}'.format(
             self.item_type,
             self.cite_key,
-            ',\n  '.join('{} = "{}"'.format(k, v) for k, v in self.fields.items()))
+            ',\n  '.join('{} = {{{}}}'.format(k, v) for k, v in self.fields.items()))
 
 
 class Database:
