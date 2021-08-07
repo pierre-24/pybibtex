@@ -11,7 +11,7 @@ init:
 	pip install -e . && pip install -r requirements.txt
 
 lint:
-	flake8 pybibtex --max-line-length=120 --ignore=N802
+	flake8 pybibtex --max-line-length=120 --ignore=N802 --extend-exclude="_utf8translate.py"
 
 test:
 	python -m unittest discover -s pybibtex.tests

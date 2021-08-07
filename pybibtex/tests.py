@@ -3,6 +3,7 @@ from typing import Tuple
 
 import pybibtex.parser as P
 from pybibtex.bibliography import Database
+from pybibtex.latexutf8 import utf8decode, utf8encode, LtxUTF8Parser
 
 
 class LiteralTestCase(unittest.TestCase):
@@ -238,3 +239,64 @@ class ParserStringTestCase(unittest.TestCase):
 
         self.assertEqual(defs[key1], val1)
         self.assertEqual(db['whatever'].fields['key'], val1 + val_in + val2)
+
+
+class LaTeXUTF8TestCase(unittest.TestCase):
+
+    @staticmethod
+    def transform(inp: str, macros: dict) -> str:
+        return LtxUTF8Parser(inp, macros).transform()
+
+    def test_macro_noarg(self):
+        str_in = 'plant\\x'
+        str_out = 'planté'
+        macro_def = {
+            'x': 233  # = é
+        }
+
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
+
+        str_in = 'plant\\y'  # unknown macro → left as is!
+        self.assertEqual(self.transform(str_in, macro_def), str_in)
+
+    def test_macro_with_arg(self):
+        str_in = 'plant\\xe{b} un arbre'
+        str_out = 'planté un arbre'
+        macro_def = {
+            'xe': {
+                'a': 232,  # = è
+                'b': 233  # = é
+            }
+        }
+
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
+
+        str_in = 'm\\xe are'  # equivalent to `m\xe{a}re`
+        str_out = 'mère'
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
+
+    def test_nonalpha_macro_with_arg(self):
+        str_in = '\\^etre'
+        str_out = 'être'
+        macro_def = {
+            '^': {
+                'a': 226,  # = â
+                'e': 234  # = ê
+            }
+        }
+
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
+
+        str_in = 'gr\\^ace'
+        str_out = 'grâce'
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
+
+    # test the two API functions:
+    TEST_IN = 'été à la chasse aux mûres'
+    TEST_OUT = "\\'et\\'e \\`a la chasse aux m\\^ures"
+
+    def test_decode(self):
+        self.assertEqual(utf8decode(self.TEST_IN), self.TEST_OUT)
+
+    def test_encode(self):
+        self.assertEqual(utf8encode(self.TEST_OUT), self.TEST_IN)
