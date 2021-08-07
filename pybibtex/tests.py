@@ -248,23 +248,16 @@ class LaTeXUTF8TestCase(unittest.TestCase):
         return LtxUTF8Parser(inp, macros).transform()
 
     def test_macro_noarg(self):
-        str_in = 'plant\\x, le sapin'
-        str_out = 'planté, le sapin'
         macro_def = {
             'x': 233  # = é
         }
 
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
+        self.assertEqual(self.transform('plant\\x, le sapin', macro_def), 'planté, le sapin')
 
         str_in = 'plant\\y'  # unknown macro → left as is!
         self.assertEqual(self.transform(str_in, macro_def), str_in)
 
-        str_in = 'plant{\\x}, le sapin'  # remove macro enclosed in braces
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
-
     def test_macro_with_arg(self):
-        str_in = 'plant\\xe{b} un arbre'
-        str_out = 'planté un arbre'
         macro_def = {
             'xe': {
                 'a': 232,  # = è
@@ -272,15 +265,10 @@ class LaTeXUTF8TestCase(unittest.TestCase):
             }
         }
 
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
-
-        str_in = 'm\\xe are'  # equivalent to `m\xe{a}re`
-        str_out = 'mère'
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
+        self.assertEqual(self.transform('plant\\xe{b} un arbre', macro_def), 'planté un arbre')
+        self.assertEqual(self.transform('m\\xe are', macro_def), 'mère')  # equivalent to `m\xe{a}re`
 
     def test_nonalpha_macro_with_arg(self):
-        str_in = '\\^etre'
-        str_out = 'être'
         macro_def = {
             '^': {
                 'a': 226,  # = â
@@ -288,11 +276,25 @@ class LaTeXUTF8TestCase(unittest.TestCase):
             }
         }
 
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
+        self.assertEqual(self.transform('\\^etre', macro_def), 'être')
+        self.assertEqual(self.transform('gr\\^ace', macro_def), 'grâce')
 
-        str_in = 'gr\\^ace'
-        str_out = 'grâce'
-        self.assertEqual(self.transform(str_in, macro_def), str_out)
+    def test_remove_braces_for_enclosed_macro(self):
+        macro_def = {
+            'x': 233,  # = é
+            'y': {
+                'a': 233  # = é
+            },
+            "'": {
+                'e': 233
+            }
+        }
+
+        # test the different forms of macros:
+        self.assertEqual(self.transform('mang{\\x}', macro_def), 'mangé')
+        self.assertEqual(self.transform("mang{\\'e}", macro_def), 'mangé')
+        self.assertEqual(self.transform('mang{\\y a}', macro_def), 'mangé')
+        self.assertEqual(self.transform('mang{\\y{a}}', macro_def), 'mangé')
 
     # test the two API functions:
     TEST_IN = 'été à la chasse aux mûres'
