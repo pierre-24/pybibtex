@@ -92,7 +92,15 @@ class LtxUTF8Parser:
         ret = ''
         while self.current_token.type != LtxTokenType.EOS:
             if self.current_token.type == LtxTokenType.BACKSLASH:
-                ret += self.macro()
+                prev_was_lcbrace = len(ret) > 0 and ret[-1] == LtxTokenType.LCBRACE.value
+                value = self.macro()
+
+                # remove enclosing braces if the replacement actually happened:
+                if prev_was_lcbrace and value[0] != '\\' and self.current_token.type == LtxTokenType.RCBRACE:
+                    self.eat(LtxTokenType.RCBRACE)
+                    ret = ret[:-1]
+
+                ret += value
             else:
                 ret += self.plain_text()
 
@@ -132,13 +140,12 @@ class LtxUTF8Parser:
         if type(macro_val) is int:  # no argument
             return chr(macro_val)
         else:  # argument
-            arg = ''
             no_arg = ''
             if self.current_token.type == LtxTokenType.BACKSLASH:
                 arg = self.macro(skip_arg=True)
                 no_arg = '\\{}'.format(arg)
             elif self.current_token.type == LtxTokenType.LCBRACE:
-                arg = self.enclosed()
+                arg = self.enclosed_arg()
                 no_arg = '{{{}}}'.format(arg)
             else:
                 if is_alpha_name:
@@ -153,7 +160,7 @@ class LtxUTF8Parser:
             else:
                 return '\\{}{}'.format(name, no_arg)
 
-    def enclosed(self) -> str:
+    def enclosed_arg(self) -> str:
         """Get enclosed content (for macro arg), inside a pair of LCBRACE and RCBRACE
         """
 

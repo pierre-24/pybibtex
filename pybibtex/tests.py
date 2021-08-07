@@ -248,8 +248,8 @@ class LaTeXUTF8TestCase(unittest.TestCase):
         return LtxUTF8Parser(inp, macros).transform()
 
     def test_macro_noarg(self):
-        str_in = 'plant\\x'
-        str_out = 'planté'
+        str_in = 'plant\\x, le sapin'
+        str_out = 'planté, le sapin'
         macro_def = {
             'x': 233  # = é
         }
@@ -258,6 +258,9 @@ class LaTeXUTF8TestCase(unittest.TestCase):
 
         str_in = 'plant\\y'  # unknown macro → left as is!
         self.assertEqual(self.transform(str_in, macro_def), str_in)
+
+        str_in = 'plant{\\x}, le sapin'  # remove macro enclosed in braces
+        self.assertEqual(self.transform(str_in, macro_def), str_out)
 
     def test_macro_with_arg(self):
         str_in = 'plant\\xe{b} un arbre'
