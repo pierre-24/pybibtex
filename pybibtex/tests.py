@@ -1,9 +1,10 @@
 import unittest
-from typing import Tuple
+from typing import Tuple, List
 
 import pybibtex.parser as P
 from pybibtex.bibliography import Database
 from pybibtex.latexutf8 import utf8decode, utf8encode, LtxUTF8Parser
+from pybibtex.authors import AuthorsParser, Author
 
 
 class LiteralTestCase(unittest.TestCase):
@@ -286,7 +287,7 @@ class LaTeXUTF8TestCase(unittest.TestCase):
                 'a': 233  # = é
             },
             "'": {
-                'e': 233
+                'e': 233  # = é
             }
         }
 
@@ -297,11 +298,68 @@ class LaTeXUTF8TestCase(unittest.TestCase):
         self.assertEqual(self.transform('mang{\\y{a}}', macro_def), 'mangé')
 
     # test the two API functions:
-    TEST_IN = 'été à la chasse aux mûres'
-    TEST_OUT = "\\'et\\'e \\`a la chasse aux m\\^ures"
+    TEST_IN = "Cet été, j'ai été à la chasse aux mûres"
+    TEST_OUT = "Cet \\'et\\'e, j'ai \\'et\\'e \\`a la chasse aux m\\^ures"
 
     def test_decode(self):
         self.assertEqual(utf8decode(self.TEST_IN), self.TEST_OUT)
 
     def test_encode(self):
         self.assertEqual(utf8encode(self.TEST_OUT), self.TEST_IN)
+
+
+class AuthorsTestCase(unittest.TestCase):
+
+    @staticmethod
+    def transform(inp: str) -> List[Author]:
+        return AuthorsParser(inp).authors()
+
+    @staticmethod
+    def word(inp: str) -> Tuple[str, int]:
+        return AuthorsParser(inp).word()
+
+    def test_capitalization(self):
+        word = 'test'
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = 'Test'
+        self.assertEqual(self.word(word), (word, 1))
+
+        word = "{\\'E}"
+        self.assertEqual(self.word(word), (word, 1))  # special characters has the case of their argument
+
+        word = "{\\'e}"
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = '{\\x{É}}'
+        self.assertEqual(self.word(word), (word, 1))
+
+        word = '{\\x{é}}'
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = '{\\x}'
+        self.assertEqual(self.word(word), (word, -1))  # this is special character, but it has no argument, so caseless
+
+        word = '{E}'
+        self.assertEqual(self.word(word), (word, -1))  # BRACEDITEM has no case!
+
+        word = "{{\\'E}}"
+        self.assertEqual(self.word(word), (word, -1))  # this is NOT a special character (two pairs of braces)
+
+        word = '{É}cole'
+        self.assertEqual(self.word(word), (word, 0))  # BRACEDITEM has no case, so the next letter is taken
+
+    def test_one_author_natural_form(self):
+        print(self.transform('Phillipe de Belgique'))
+
+    def test_one_author_colon_form(self):
+        print(self.transform('de Belgique, Phillipe'))
+
+    def test_one_author_colon_form_pseudoletter(self):
+        print(self.transform("de Flandre, {\\'E}mile"))
+
+    def test_multi_authors_natural_form(self):
+        print(self.transform('Phillipe de Belgique and Pierre Beaujean'))
+
+    def test_multi_authors_colon_form(self):
+        print(self.transform('de Belgique, Phillipe and Beaujean, Pierre'))
