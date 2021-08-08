@@ -1,9 +1,10 @@
 import unittest
-from typing import Tuple
+from typing import Tuple, List
 
 import pybibtex.parser as P
 from pybibtex.bibliography import Database
 from pybibtex.latexutf8 import utf8decode, utf8encode, LtxUTF8Parser
+from pybibtex.authors import AuthorsParser, Author
 
 
 class LiteralTestCase(unittest.TestCase):
@@ -286,7 +287,7 @@ class LaTeXUTF8TestCase(unittest.TestCase):
                 'a': 233  # = é
             },
             "'": {
-                'e': 233
+                'e': 233  # = é
             }
         }
 
@@ -297,11 +298,146 @@ class LaTeXUTF8TestCase(unittest.TestCase):
         self.assertEqual(self.transform('mang{\\y{a}}', macro_def), 'mangé')
 
     # test the two API functions:
-    TEST_IN = 'été à la chasse aux mûres'
-    TEST_OUT = "\\'et\\'e \\`a la chasse aux m\\^ures"
+    TEST_IN = "Cet été, j'ai été à la chasse aux mûres"
+    TEST_OUT = "Cet \\'et\\'e, j'ai \\'et\\'e \\`a la chasse aux m\\^ures"
 
     def test_decode(self):
         self.assertEqual(utf8decode(self.TEST_IN), self.TEST_OUT)
 
     def test_encode(self):
         self.assertEqual(utf8encode(self.TEST_OUT), self.TEST_IN)
+
+
+class AuthorsTestCase(unittest.TestCase):
+
+    @staticmethod
+    def word(inp: str) -> Tuple[str, int]:
+        return AuthorsParser(inp).word()
+
+    def test_capitalization(self):
+        word = 'test'
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = 'Test'
+        self.assertEqual(self.word(word), (word, 1))
+
+        word = "{\\'E}"
+        self.assertEqual(self.word(word), (word, 1))  # special characters has the case of their argument
+
+        word = "{\\'e}"
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = '{\\x{É}}'
+        self.assertEqual(self.word(word), (word, 1))
+
+        word = '{\\x{é}}'
+        self.assertEqual(self.word(word), (word, 0))
+
+        word = '{\\x}'
+        self.assertEqual(self.word(word), (word, -1))  # this is special character, but it has no argument, so caseless
+
+        word = '{E}'
+        self.assertEqual(self.word(word), (word, -1))  # BRACEDITEM has no case!
+
+        word = "{{\\'E}}"
+        self.assertEqual(self.word(word), (word, -1))  # this is NOT a special character (two pairs of braces)
+
+        word = '{É}cole'
+        self.assertEqual(self.word(word), (word, 0))  # BRACEDITEM has no case, so the next letter is taken
+
+    @staticmethod
+    def transform(inp: str) -> List[Author]:
+        return AuthorsParser(inp).authors()
+
+    def test_one_author_colon_form_special_char(self):
+        first = "{\\'A}a Aa"
+        von = 'bb xx'
+        last = 'Cc Dd'
+        jr = 'jj'
+        authors = self.transform('{v} {l}, {j}, {f}'.format(f=first, v=von, l=last, j=jr))
+
+        self.assertEqual(len(authors), 1)
+
+        author = authors[0]
+        self.assertEqual(author.first, first)
+        self.assertEqual(author.last, last)
+        self.assertEqual(author.von, von)
+        self.assertEqual(author.jr, jr)
+
+    def test_xd_resource(self):
+        """Run http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html#splitting_examples
+        """
+
+        test_suite = [
+            # -- 1. "NATURAL" FORM
+            ({'f': 'AA', 'v': None, 'l': 'BB', 'j': None}, '{f} {l}'),
+            # last word is always last:
+            ({'f': 'AA', 'v': None, 'l': 'bb', 'j': None}, '{f} {l}'),
+            ({'f': '', 'v': None, 'l': 'AA', 'j': None}, '{l}'),
+            ({'f': '', 'v': None, 'l': 'aa', 'j': None}, '{l}'),
+            # von
+            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': None}, '{f} {v} {l}'),
+            # digits are caseless
+            ({'f': 'AA 1B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '1b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            # BRACEDITEM are caseless
+            ({'f': 'AA {b}B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA {B}B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '{b}b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '{B}b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            # non-alpha are caseless
+            ({'f': 'AA \\BB{b}', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '\\bb{b} cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            # caseless words goes with first, then last
+            ({'f': 'AA {bb}', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': 'bb', 'l': '{cc} DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA {bb}', 'v': None, 'l': 'CC', 'j': None}, '{f} {l}'),
+            # -- 2. COLON FORM
+            ({'f': 'AA', 'v': None, 'l': 'BB', 'j': None}, '{l}, {f}'),
+            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': None}, '{v} {l}, {f}'),
+            ({'f': 'aa', 'v': 'bb', 'l': 'CC', 'j': None}, '{v} {l}, {f}'),  # case does not matter for first!
+            ({'f': '', 'v': None, 'l': 'BB', 'j': None}, '{l}, '),  # empty first
+            # von
+            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': None}, '{v} {l}, {f}'),
+            # jr part
+            ({'f': 'AA', 'v': 'bb', 'l': 'DD', 'j': 'cc'}, '{v} {l}, {j}, {f}'),
+            ({'f': 'AA', 'v': 'bb', 'l': 'DD', 'j': ''}, '{v} {l}, {j}, {f}'),  # empty jr
+        ]
+
+        for p, f in test_suite:
+            authors = self.transform(f.format(**p))
+            self.assertEqual(len(authors), 1)
+            author = authors[0]
+            self.assertEqual(author.first, p['f'])
+            self.assertEqual(author.last, p['l'])
+            self.assertEqual(author.von, p['v'])
+            self.assertEqual(author.jr, p['j'])
+
+    def test_tdb(self):
+        """Run the tests found in "Tames the Beast" for the "natural" form
+        """
+
+        test_suite = [
+            # -- 1. "NATURAL" FORM
+            ({'f': '', 'v': 'jean de la', 'l': 'fontaine'}, '{f} {v} {l}'),
+            ({'f': 'Jean', 'v': 'de la', 'l': 'fontaine'}, '{f} {v} {l}'),
+            ({'f': 'Jean {de}', 'v': 'la', 'l': 'fontaine'}, '{f} {v} {l}'),
+            ({'f': 'Jean {de} {la}', 'v': None, 'l': 'fontaine'}, '{f} {l}'),
+            ({'f': 'Jean De La', 'v': None, 'l': 'fontaine'}, '{f} {l}'),
+            ({'f': '', 'v': 'jean De la', 'l': 'fontaine'}, '{f} {v} {l}'),
+            ({'f': 'Jean', 'v': 'de', 'l': 'La Fontaine'}, '{f} {v} {l}'),
+            # -- 2. COLON FORM
+            ({'f': 'Jean', 'v': 'de la', 'l': 'fontaine'}, '{v} {l}, {f}'),
+            ({'f': 'Jean', 'v': None, 'l': 'De La fontaine'}, '{l}, {f}'),
+            ({'f': 'Jean', 'v': 'De la', 'l': 'fontaine'}, '{v} {l}, {f}'),
+            ({'f': 'Jean', 'v': 'de', 'l': 'La fontaine'}, '{v} {l}, {f}'),
+        ]
+
+        for p, f in test_suite:
+            authors = self.transform(f.format(**p))
+            self.assertEqual(len(authors), 1)
+            author = authors[0]
+            self.assertEqual(author.first, p['f'])
+            self.assertEqual(author.last, p['l'])
+            self.assertEqual(author.von, p['v'])

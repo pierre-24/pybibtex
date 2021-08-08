@@ -1,4 +1,6 @@
-from typing import Dict
+from typing import Dict, Iterable, List
+
+from pybibtex.authors import AuthorsParser, Author
 
 
 class Item:
@@ -9,6 +11,13 @@ class Item:
         self.cite_key = cite_key
         self.item_type = item_type.lower()
         self.fields = fields
+
+    def authors(self, possible_fields: Iterable[str] = ('author', 'Author', 'AUTHOR')) -> List[Author]:
+        for f in possible_fields:
+            if f in self.fields:
+                return AuthorsParser(self.fields[f]).authors()
+
+        return []
 
     def __repr__(self) -> str:
         return "Item('{}', '{}')".format(self.cite_key, self.item_type)
