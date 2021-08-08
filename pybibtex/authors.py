@@ -10,6 +10,9 @@ class Author:
         self.jr = jr
 
     def __str__(self):
+        """Return the author in the "comma" form (since it is the only one which handle "jr")
+        """
+
         return '{}{}, {}{}'.format(
             '' if self.von is None else self.von + ' ',
             self.last,
@@ -18,7 +21,7 @@ class Author:
         )
 
     def __repr__(self):
-        return "Author('{}', '{}', '{}', '{}')".format(self.first, self.last, self.von, self.jr)
+        return "Author('{}', '{}', {}, {})".format(self.first, self.last, repr(self.von), repr(self.jr))
 
 
 @unique
