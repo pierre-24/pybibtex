@@ -17,6 +17,9 @@ class Author:
             self.first
         )
 
+    def __repr__(self):
+        return "Author('{}', '{}', '{}', '{}')".format(self.first, self.last, self.von, self.jr)
+
 
 @unique
 class AuthorTokenType(Enum):
@@ -50,6 +53,107 @@ class AuthorToken:
 
 class AuthorParserSyntaxError(Exception):
     pass
+
+
+class WordSequence:
+    def transform(self) -> Author:
+        """Transform the word sequence into an author
+        """
+
+        raise NotImplementedError()
+
+    @staticmethod
+    def to_sentence(seq: List[str], sep: str = ' ') -> str:
+        return sep.join(seq)
+
+
+class PureWordSequence(WordSequence):
+    def __init__(self, words: List[str], capitalization: List[int]):
+        self.words = words
+        self.capitalizations = capitalization
+
+    def transform(self) -> Author:
+        """Transform a sequence written in "natural form" (no comma) into an author:
+
+        1. The last word is always `last`;
+        2. As long as they are uppercase or caseless, the first words are in `first`
+           (stops at the first lowercase one);
+        3. The remaining is in `von`;
+        4. There is no `jr` part.
+        """
+
+        von = None
+        jr = None
+        words = self.words
+
+        # get first
+        end_first = 0
+        while end_first < len(words) - 1:
+            if self.capitalizations[end_first] in [1, -1]:
+                end_first += 1
+            else:
+                break
+
+        first = WordSequence.to_sentence(words[:end_first])
+
+        # get last
+        start_last = len(words) - 1
+
+        while start_last > end_first:
+            if self.capitalizations[start_last - 1] in [1, -1]:
+                start_last -= 1
+            else:
+                break
+
+        last = WordSequence.to_sentence(words[start_last:])
+
+        # get von, if any
+        if end_first != start_last:
+            von = WordSequence.to_sentence(words[end_first:start_last])
+
+        return Author(first, last, von=von, jr=jr)
+
+
+class CommaSeparatedWordSequence(WordSequence):
+    def __init__(self, seq: List[List[str]], capitalization: List[List[int]]):
+        self.groups = seq
+        self.num_fields = len(self.groups)
+
+        self.capitalizations = capitalization
+
+    def transform(self) -> Author:
+        """Transform a sequence written in "comma form" into an author:
+
+        1. The last group is always `first`;
+        2. If they are 3 groups, the second is `jr`;
+        2. Put the last word of the first group in `last`.
+           Then, as long as they are uppercase or caseless, the last words of the first group
+           are in `last` (stops at the first lowercase one);
+        3. The remaining of the first group is in `von`;
+        """
+
+        first = WordSequence.to_sentence(self.groups[-1])
+        jr = None if self.num_fields == 2 else WordSequence.to_sentence(self.groups[-2])
+
+        words = self.groups[0]
+        capitalizations = self.capitalizations[0]
+
+        start_last = len(words) - 1
+
+        while start_last > 0:
+            if capitalizations[start_last - 1] in [1, -1]:
+                start_last -= 1
+            else:
+                break
+
+        last = WordSequence.to_sentence(words[start_last:])
+
+        if start_last > 0:
+            von = ' '.join(words[:start_last])
+        else:
+            von = None
+
+        return Author(first, last, von=von, jr=jr)
 
 
 class AuthorsParser:
@@ -114,51 +218,68 @@ class AuthorsParser:
 
         yield AuthorToken(AuthorTokenType.EOS, '\0', i)
 
-    def authors(self) -> List[Author]:
-        authors = []
-
-        while self.current_token.type != AuthorTokenType.EOS:
-            authors.append(self.author())
-
-        return authors
-
-    @staticmethod
-    def get_capitalization(word: str):
-        """Get the capitalization of the word according to
-        http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html#case_determination
+    def skip_empty(self):
+        """Skip spaces, newlines and comments
         """
 
-        pass
+        while self.current_token.type == AuthorTokenType.SPACE:
+            self.next()
 
-    def author(self) -> Author:
-        words = []
-        capitalizations = []
-        pos_comma = []
+    def authors(self) -> List[Author]:
+        return [s.transform() for s in self.sequences()]
 
+    def sequences(self) -> List[WordSequence]:
+        """Get a list of word sequences (either pure or comma separated) separated by "and"
+        """
+
+        sequences: List[WordSequence] = []
+        words = [[]]
+        capitalizations = [[]]
+        group = 0
+
+        def make_seq():
+            if group == 0:
+                sequences.append(PureWordSequence(words[0], capitalizations[0]))
+            else:
+                sequences.append(CommaSeparatedWordSequence(words, capitalizations))
+
+        self.skip_empty()
         while self.current_token.type != AuthorTokenType.EOS:
             if self.current_token.type in [
                 AuthorTokenType.LETTER, AuthorTokenType.BRACEDITEM, AuthorTokenType.SPECIALCHAR
             ]:
-                w, c = self.word()
-                if w.lower() == 'and':
-                    self.next()
-                    break
-                words.append(w)
-                capitalizations.append(c)
-            elif self.current_token.type == AuthorTokenType.COMMA:
-                pos_comma.append(len(words))
-                self.next()
-            else:
-                self.next()
+                word, capitalization = self.word()
 
-        print(words, pos_comma, capitalizations)
+                if word.lower() == 'and':
+                    make_seq()
+                    words = [[]]
+                    capitalizations = [[]]
+                else:
+                    words[group].append(word)
+                    capitalizations[group].append(capitalization)
+                self.skip_empty()
+            elif self.current_token.type == AuthorTokenType.COMMA:
+                group += 1
+                if group > 3:
+                    raise AuthorParserSyntaxError(
+                        'got {}, which is more than 2 comma!'.format(self.current_token))
+                words.append([])
+                capitalizations.append([])
+
+                self.next()
+                self.skip_empty()
+
+        # catch last
+        make_seq()
+
+        return sequences
 
     def word(self) -> Tuple[str, int]:
         """Get a word and its capitalization,
         according to http://tug.ctan.org/info/bibtex/tamethebeast/ttb_en.pdf :
         + ``-1`` if the word is caseless,
         + ``0`` if it is lowercase,
-        + ``1`` if it is upercase
+        + ``1`` if it is uppercase
 
         Note: a BRACEDITEM has no case, but a special character has the one of its argument
         """
@@ -171,13 +292,9 @@ class AuthorsParser:
         ]:
             value = self.current_token.value
             if check_capitalization:
-                if self.current_token.type == AuthorTokenType.LETTER:
-                    if value.isalpha():
-                        capitalization = 1 if value.upper() == value else 0
-                        check_capitalization = False
-                    elif value.isdigit():
-                        capitalization = 0
-                        check_capitalization = False
+                if self.current_token.type == AuthorTokenType.LETTER and value.isalpha():
+                    capitalization = 1 if value.upper() == value else 0
+                    check_capitalization = False
                 elif self.current_token.type == AuthorTokenType.SPECIALCHAR:
                     # quick and dirty look for argument
                     i = 2
