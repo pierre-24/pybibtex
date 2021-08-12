@@ -17,7 +17,7 @@ pip3 install --upgrade git+https://github.com/pierre-24/pybibtex.git
 
 No dependencies are required (except python >= 3.6).
 
-See the documentation [there](https://pierre-24.github.io/pybibtex/) demonstrating the (quite simple) API.
+See the documentation [there](https://pierre-24.github.io/pybibtex/usage/) demonstrating the (quite simple) API.
 
 ## Contribute
 
