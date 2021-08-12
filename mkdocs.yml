@@ -13,6 +13,7 @@ nav:
       - BibTeX Parser: code_reference/parser.md
       - Authors: code_reference/authors.md
       - UTF-8 handling: code_reference/utf8.md
+    - Contributing: contributing.md
 
 theme:
   name: material
