@@ -161,7 +161,7 @@ class LtxUTF8Parser:
                 return '\\{}{}'.format(name, no_arg)
 
     def enclosed_arg(self) -> str:
-        """Get enclosed content (for macro arg), inside a pair of LCBRACE and RCBRACE
+        """Get enclosed content (for macro arg), inside a pair of ``LCBRACE`` and ``RCBRACE``
         """
 
         self.eat(LtxTokenType.LCBRACE)

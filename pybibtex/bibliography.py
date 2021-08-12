@@ -4,15 +4,25 @@ from pybibtex.authors import AuthorsParser, Author
 
 
 class Item:
-    """Note: `item_type` and `cite_key` are case technically case insensitive, but the actual `cite_key` is kept
+    """Bibliography item.
+
+    You can access the fields directly using ``item['key']``.
+
+    .. note::
+        ``item_type`` and ``cite_key`` are case technically case insensitive,
+        but the actual ``cite_key`` is kept
 
     """
     def __init__(self, cite_key: str, item_type: str = 'article', fields: dict = None):
-        self.cite_key = cite_key
-        self.item_type = item_type.lower()
+        self.cite_key = cite_key  #: citation key
+        self.item_type = item_type.lower()  #: item type (article, book, ...)
         self.fields = fields
 
     def authors(self, possible_fields: Iterable[str] = ('author', 'Author', 'AUTHOR')) -> List[Author]:
+        """Get a list of ``Authors``.
+
+        :param possible_fields: looks for the fields in ``possible_fields`` to get the authors, stops when found.
+        """
         for f in possible_fields:
             if f in self.fields:
                 return AuthorsParser(self.fields[f]).authors()
@@ -44,7 +54,11 @@ class Item:
 class Database:
     """Database of bibliographic items
 
-    Note: `cite_key` are considered to be case insensitive in lookup
+    You can access the item directly by their citation key using ``bibliography['citation-key']``.
+
+    .. note::
+
+        The ``cite_key`` are considered to be case insensitive in lookup.
     """
 
     def __init__(self, db: Dict[str, Item] = None):

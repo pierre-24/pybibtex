@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md')) as f:
     long_description = f.read()
 
 setup(
-    name='pybibtex',
+    name=pybibtex.__name__,
     version=pybibtex.__version__,
 
     # Description

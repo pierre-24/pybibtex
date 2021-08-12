@@ -94,6 +94,9 @@ IS_KEY = re.compile(r'[a-zA-Z0-9_\-:]')
 
 
 class Parser:
+    """Parser for the bibliography in BiBTeX format
+    """
+
     def __init__(self, inp: str):
         self.lexer = Lexer(inp)
         self.tokenizer = self.lexer.tokenize()
@@ -156,9 +159,9 @@ class Parser:
     def literal(self) -> str:
         """Get a literal, as
 
-        ```
-        literal := [a-aA-Z_] [a-zA-Z0-9_]*
-        ```
+        .. code-block:: text
+
+            literal := [a-aA-Z_] [a-zA-Z0-9_]*
 
         Note: it cannot start by an integer, for obvious reasons.
         """
@@ -178,11 +181,12 @@ class Parser:
     def key(self) -> str:
         """Get a key,
 
-        ```
-        key := [a-zA-Z0-9_\\-:]*
-        ```
 
-        Note: that means that a key can start by an integer or `:` (that should not be a problem)
+        .. code-block:: text
+
+            key := [a-zA-Z0-9_\\-:]*
+
+        Note: that means that a key can start by an integer or ``:`` (that should not be a problem)
         """
 
         if self.current_token.type != TokenType.CHAR or not IS_KEY.match(self.current_token.value):
@@ -200,19 +204,19 @@ class Parser:
         """
         The BibTeX format is more or less defined as
 
-        ```
-        bibtex := (item | string_var | comment)*;
-        ```
+        .. code-block:: text
+
+            bibtex := (item | string_var | comment)*;
 
         with
 
-        ```
-        string_var := AT 'string' (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;
-        item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;
-        comment := (AT 'comment' CHAR* NL | CHAR*)
-        ```
+        .. code-block:: text
 
-        (it is missing the `@preamble`).
+            string_var := AT 'string' (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;
+            item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;
+            comment := (AT 'comment' CHAR* NL | CHAR*)
+
+        (it is missing the ``@preamble`` instruction).
         """
 
         db = {}
@@ -266,11 +270,11 @@ class Parser:
     def inside_string_var(self):
         """Defines a string variable:
 
-        ```
-        inside_string_var := key EQUAL value ;
-        ```
+        .. code-block:: text
 
-        Note: `key` is maybe a bit broadly defined (is `:` valid?)
+            inside_string_var := key EQUAL value ;
+
+        Note: ``key`` is maybe a bit broadly defined (is ``:`` valid?)
         """
 
         # get placeholder
@@ -288,9 +292,10 @@ class Parser:
     def inside_item(self, item_type: str) -> Item:
         """Get an item:
 
-        ```
-        inside_item := key COMMA (field (COMMA field)*)? COMMA?
-        ```
+        .. code-block:: text
+
+            inside_item := key COMMA (field (COMMA field)*)? COMMA?
+
         """
 
         # get key
@@ -332,9 +337,10 @@ class Parser:
         """
         Get a field:
 
-        ```
-        field := key EQUAL value ;
-        ```
+        .. code-block:: text
+
+            field := key EQUAL value ;
+
         """
 
         # get key
@@ -351,9 +357,9 @@ class Parser:
     def value(self) -> str:
         """A value is a string, but different stuffs can be concatenated.
 
-        ```
-        value := string_part (POUND string_part)* ;
-        ```
+        .. code-block:: text
+
+            value := string_part (POUND string_part)* ;
 
         Note: it means that integer can be concatenated, deal with it.
         """
@@ -380,20 +386,20 @@ class Parser:
         Note that for a quote to be escaped, it must be inside braces.
         Which means that braces **must** match, even in quote.
 
-        ```
-        INTEGER := [0-9]
+        .. code-block:: text
 
-        sl := CHAR*
-           | QUOTE
-           | LBRACE sl* RBRACE
-           ;
+            INTEGER := [0-9]
 
-        string_part := literal
-                    | INTEGER INTEGER*
-                    | LBRACE sl* RBRACE
-                    | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE
-                    ;
-        ```
+            sl := CHAR*
+               | QUOTE
+               | LBRACE sl* RBRACE
+               ;
+
+            string_part := literal
+                        | INTEGER INTEGER*
+                        | LBRACE sl* RBRACE
+                        | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE
+                        ;
         """
 
         if self.current_token.type == TokenType.CHAR:

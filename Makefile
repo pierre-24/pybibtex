@@ -6,6 +6,7 @@ help:
 	@echo "  lint                        to lint backend code (flake8)"
 	@echo "  test                        to run test suite"
 	@echo "  help                        to get this help"
+	@echo "  doc                         to build documentation"
 
 init:
 	pip install -e . && pip install -r requirements.txt
@@ -15,3 +16,6 @@ lint:
 
 test:
 	python -m unittest discover -s pybibtex.tests
+
+docs:
+	cd doc; make html

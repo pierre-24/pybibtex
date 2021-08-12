@@ -3,25 +3,36 @@ from enum import Enum, unique
 
 
 class Author:
-    def __init__(self, first: str, last: str, von: str = None, jr: str = None):
-        self.first = first
-        self.last = last
-        self.von = von
-        self.jr = jr
+    """Represent an author
+    """
+
+    def __init__(self, first: str, last: str, von: str = '', jr: str = ''):
+        if not last:
+            raise Exception('last must not be empty')
+
+        self.first = first  #: author first name (may be empty)
+        self.last = last  #: author last name (never empty)
+        self.von = von  #: author "von" part (may be empty)
+        self.jr = jr  #: author "jr" part (may be empty)
 
     def __str__(self):
         """Return the author in the "comma" form (since it is the only one which handle "jr")
         """
 
         return '{}{}, {}{}'.format(
-            '' if self.von is None else self.von + ' ',
+            '' if not self.von else self.von + ' ',
             self.last,
-            '' if self.jr is None else '{}, '.format(self.jr),
+            '' if not self.jr else '{}, '.format(self.jr),
             self.first
         )
 
     def __repr__(self):
-        return "Author('{}', '{}', {}, {})".format(self.first, self.last, repr(self.von), repr(self.jr))
+        return "Author('{}', '{}'{}{})".format(
+            self.first,
+            self.last,
+            '' if not self.von else ", von='{}'".format(self.von),
+            '' if not self.jr else ", jr='{}'".format(self.jr)
+        )
 
 
 @unique
@@ -55,6 +66,7 @@ class AuthorToken:
 
 
 class AuthorParserSyntaxError(Exception):
+    """Exception raised when the parser issued an error"""
     pass
 
 
@@ -85,8 +97,8 @@ class PureWordSequence(WordSequence):
         4. There is no `jr` part.
         """
 
-        von = None
-        jr = None
+        von = ''
+        jr = ''
         words = self.words
 
         # get first
@@ -136,7 +148,7 @@ class CommaSeparatedWordSequence(WordSequence):
         """
 
         first = WordSequence.to_sentence(self.groups[-1])
-        jr = None if self.num_fields == 2 else WordSequence.to_sentence(self.groups[-2])
+        jr = '' if self.num_fields == 2 else WordSequence.to_sentence(self.groups[-2])
 
         words = self.groups[0]
         capitalizations = self.capitalizations[0]
@@ -154,7 +166,7 @@ class CommaSeparatedWordSequence(WordSequence):
         if start_last > 0:
             von = ' '.join(words[:start_last])
         else:
-            von = None
+            von = ''
 
         return Author(first, last, von=von, jr=jr)
 
@@ -222,7 +234,7 @@ class AuthorsParser:
         yield AuthorToken(AuthorTokenType.EOS, '\0', i)
 
     def skip_empty(self):
-        """Skip spaces, newlines and comments
+        """Skip spaces
         """
 
         while self.current_token.type == AuthorTokenType.SPACE:
@@ -233,6 +245,18 @@ class AuthorsParser:
 
     def sequences(self) -> List[WordSequence]:
         """Get a list of word sequences (either pure or comma separated) separated by "and"
+
+
+        .. code-block:: text
+
+            spaces := SPACE SPACE* ;
+            words := word (spaces word)*
+            comma_sep_seq := words spaces? COMMA spaces? words (spaces? COMMA spaces? words)* ;
+            pure_seq := words
+            sequence := pure_seq
+                     | comma_sep_seq
+                     ;
+            sequences := sequence ("and" sequence)* ;
         """
 
         sequences: List[WordSequence] = []
@@ -279,12 +303,22 @@ class AuthorsParser:
 
     def word(self) -> Tuple[str, int]:
         """Get a word and its capitalization,
-        according to http://tug.ctan.org/info/bibtex/tamethebeast/ttb_en.pdf :
+        according to http://tug.ctan.org/info/bibtex/tamethebeast/ttb_en.pdf:
+
         + ``-1`` if the word is caseless,
         + ``0`` if it is lowercase,
         + ``1`` if it is uppercase
 
-        Note: a BRACEDITEM has no case, but a special character has the one of its argument
+        A ``BRACEDITEM`` has no case, but a special character has the one of its argument
+
+        .. code-block:: text
+
+            c := LETTER
+              | BRACEDITEM
+              | SPECIALCHAR
+              ;
+
+            word := c c* ;
         """
 
         check_capitalization = True

@@ -15,7 +15,7 @@ pip3 install --upgrade git+https://github.com/pierre-24/pybibtex.git
 
 No dependencies are required (except python >= 3.6).
 
-See a minimal working example [there](example.py) demonstrating the (quite simple) API.
+See the documentation [there](doc/source/index.rst) demonstrating the (quite simple) API.
 
 ## Contribute
 
@@ -42,4 +42,10 @@ Don't forget to work on a separate branch, and to run the linting and tests:
 ```bash
 make lint  # flake8
 make test  # unit tests
+```
+
+You can also build the documentation with
+
+```bash
+make docs
 ```

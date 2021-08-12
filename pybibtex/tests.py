@@ -370,36 +370,36 @@ class AuthorsTestCase(unittest.TestCase):
 
         test_suite = [
             # -- 1. "NATURAL" FORM
-            ({'f': 'AA', 'v': None, 'l': 'BB', 'j': None}, '{f} {l}'),
+            ({'f': 'AA', 'v': '', 'l': 'BB', 'j': ''}, '{f} {l}'),
             # last word is always last:
-            ({'f': 'AA', 'v': None, 'l': 'bb', 'j': None}, '{f} {l}'),
-            ({'f': '', 'v': None, 'l': 'AA', 'j': None}, '{l}'),
-            ({'f': '', 'v': None, 'l': 'aa', 'j': None}, '{l}'),
+            ({'f': 'AA', 'v': '', 'l': 'bb', 'j': ''}, '{f} {l}'),
+            ({'f': '', 'v': '', 'l': 'AA', 'j': ''}, '{l}'),
+            ({'f': '', 'v': '', 'l': 'aa', 'j': ''}, '{l}'),
             # von
-            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': ''}, '{f} {v} {l}'),
             # digits are caseless
-            ({'f': 'AA 1B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': '1b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA 1B', 'v': 'cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '1b cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
             # BRACEDITEM are caseless
-            ({'f': 'AA {b}B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA {B}B', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': '{b}b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': '{B}b cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA {b}B', 'v': 'cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA {B}B', 'v': 'cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '{b}b cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '{B}b cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
             # non-alpha are caseless
-            ({'f': 'AA \\BB{b}', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': '\\bb{b} cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
+            ({'f': 'AA \\BB{b}', 'v': 'cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': '\\bb{b} cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
             # caseless words goes with first, then last
-            ({'f': 'AA {bb}', 'v': 'cc', 'l': 'DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA', 'v': 'bb', 'l': '{cc} DD', 'j': None}, '{f} {v} {l}'),
-            ({'f': 'AA {bb}', 'v': None, 'l': 'CC', 'j': None}, '{f} {l}'),
+            ({'f': 'AA {bb}', 'v': 'cc', 'l': 'DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA', 'v': 'bb', 'l': '{cc} DD', 'j': ''}, '{f} {v} {l}'),
+            ({'f': 'AA {bb}', 'v': '', 'l': 'CC', 'j': ''}, '{f} {l}'),
             # -- 2. COLON FORM
-            ({'f': 'AA', 'v': None, 'l': 'BB', 'j': None}, '{l}, {f}'),
-            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': None}, '{v} {l}, {f}'),
-            ({'f': 'aa', 'v': 'bb', 'l': 'CC', 'j': None}, '{v} {l}, {f}'),  # case does not matter for first!
-            ({'f': '', 'v': None, 'l': 'BB', 'j': None}, '{l}, '),  # empty first
+            ({'f': 'AA', 'v': '', 'l': 'BB', 'j': ''}, '{l}, {f}'),
+            ({'f': 'AA', 'v': 'bb', 'l': 'CC', 'j': ''}, '{v} {l}, {f}'),
+            ({'f': 'aa', 'v': 'bb', 'l': 'CC', 'j': ''}, '{v} {l}, {f}'),  # case does not matter for first!
+            ({'f': '', 'v': '', 'l': 'BB', 'j': ''}, '{l}, '),  # empty first
             # von
-            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': None}, '{v} {l}, {f}'),
+            ({'f': 'AA', 'v': 'bb CC dd', 'l': 'EE', 'j': ''}, '{v} {l}, {f}'),
             # jr part
             ({'f': 'AA', 'v': 'bb', 'l': 'DD', 'j': 'cc'}, '{v} {l}, {j}, {f}'),
             ({'f': 'AA', 'v': 'bb', 'l': 'DD', 'j': ''}, '{v} {l}, {j}, {f}'),  # empty jr
@@ -423,13 +423,13 @@ class AuthorsTestCase(unittest.TestCase):
             ({'f': '', 'v': 'jean de la', 'l': 'fontaine'}, '{f} {v} {l}'),
             ({'f': 'Jean', 'v': 'de la', 'l': 'fontaine'}, '{f} {v} {l}'),
             ({'f': 'Jean {de}', 'v': 'la', 'l': 'fontaine'}, '{f} {v} {l}'),
-            ({'f': 'Jean {de} {la}', 'v': None, 'l': 'fontaine'}, '{f} {l}'),
-            ({'f': 'Jean De La', 'v': None, 'l': 'fontaine'}, '{f} {l}'),
+            ({'f': 'Jean {de} {la}', 'v': '', 'l': 'fontaine'}, '{f} {l}'),
+            ({'f': 'Jean De La', 'v': '', 'l': 'fontaine'}, '{f} {l}'),
             ({'f': '', 'v': 'jean De la', 'l': 'fontaine'}, '{f} {v} {l}'),
             ({'f': 'Jean', 'v': 'de', 'l': 'La Fontaine'}, '{f} {v} {l}'),
             # -- 2. COLON FORM
             ({'f': 'Jean', 'v': 'de la', 'l': 'fontaine'}, '{v} {l}, {f}'),
-            ({'f': 'Jean', 'v': None, 'l': 'De La fontaine'}, '{l}, {f}'),
+            ({'f': 'Jean', 'v': '', 'l': 'De La fontaine'}, '{l}, {f}'),
             ({'f': 'Jean', 'v': 'De la', 'l': 'fontaine'}, '{v} {l}, {f}'),
             ({'f': 'Jean', 'v': 'de', 'l': 'La fontaine'}, '{v} {l}, {f}'),
         ]
