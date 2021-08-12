@@ -12,7 +12,7 @@ It does not handle `@preamble`.
 ## Install & use
 
 ```bash
-pip3 install --upgrade git+https://github.com/pierre-24/pybibtex.git
+pip3 install --upgrade git+https://github.com/pierre-24/pybibtex.git@v0.1.2
 ```
 
 No dependencies are required (except python >= 3.6).

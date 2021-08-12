@@ -6,3 +6,4 @@ mkdocs-material
 mkdocstrings
 pymdown-extensions
 MarkupSafe>=2.0
+bump2version
