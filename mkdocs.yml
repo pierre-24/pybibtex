@@ -1,0 +1,31 @@
+site_name: "pybibtex"
+site_description: "Provides a Python API to parse BibTeX files."
+site_url: "https://mkdocstrings.github.io/"
+repo_url: "https://github.com/pierre-24/pybibtex"
+edit_uri: "blob/master/docs/"
+repo_name: "pierre-24/pybibtex"
+
+nav:
+    - Home: index.md
+    - Usage: usage.md
+    - Code reference:
+      - Bibliography: code_reference/bibliography.md
+      - BibTeX Parser: code_reference/parser.md
+      - Authors: code_reference/authors.md
+      - UTF-8 handling: code_reference/utf8.md
+
+theme:
+  name: material
+
+markdown_extensions:
+- admonition
+- pymdownx.highlight
+- pymdownx.superfences
+- pymdownx.snippets:
+    check_paths: true
+- toc:
+    permalink: "¤"
+
+plugins:
+- search
+- mkdocstrings

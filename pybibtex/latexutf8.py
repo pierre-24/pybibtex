@@ -4,8 +4,14 @@ from enum import Enum, unique
 from pybibtex._utf8translate import TRANSLATION_TABLE, REVERSE_TRANSLATION_TABLE
 
 
-def utf8decode(inp) -> str:
-    """Replace declared UTF-8 character by their LaTeX equivalent
+def utf8decode(inp: str) -> str:
+    """Replace dec:lared UTF-8 character by their LaTeX equivalent
+
+    Parameters:
+        inp: string containing special UTF-8 characters
+
+    Returns:
+        A string with the LaTeX equivalent of UTF-8 characters
     """
     return inp.translate(TRANSLATION_TABLE)
 
@@ -43,7 +49,9 @@ class LtxToken:
         )
 
 
-class LtxParserSyntaxError(Exception):
+class UTF8EncodeException(Exception):
+    """Exception raised when there is an error in the input string
+    """
     pass
 
 
@@ -51,7 +59,13 @@ class LtxUTF8Parser:
     """Micro LaTeX parser for the macro with an UTF-8 equivalent
     """
 
-    def __init__(self, inp, macro_def: dict):
+    def __init__(self, inp: str, macro_def: dict):
+        """Initialize the object
+
+        Parameters:
+            inp: string containing LaTeX macros
+            macro_def: definition of the macros
+        """
         self.input = inp
         self.current_token: LtxToken = None
         self.tokenizer = self.tokenize()
@@ -72,7 +86,7 @@ class LtxUTF8Parser:
         if self.current_token.type == typ:
             self.next()
         else:
-            raise LtxParserSyntaxError('expected {}, got {}'.format(typ, self.current_token))
+            raise UTF8EncodeException('expected {}, got {}'.format(typ, self.current_token))
 
     def tokenize(self) -> Iterator[LtxToken]:
         i = 0
@@ -170,7 +184,7 @@ class LtxUTF8Parser:
 
         while True:
             if self.current_token.type == LtxTokenType.EOS:
-                raise LtxParserSyntaxError('got {} while parsing string'.format(self.current_token))
+                raise UTF8EncodeException('got {} while parsing string'.format(self.current_token))
             elif self.current_token.type == LtxTokenType.LCBRACE:
                 opening_level += 1
             elif self.current_token.type == LtxTokenType.RCBRACE:
@@ -185,8 +199,14 @@ class LtxUTF8Parser:
         return out
 
 
-def utf8encode(inp) -> str:
+def utf8encode(inp: str) -> str:
     """Replace LaTeX characters by their UTF-8 equivalent
+
+    Parameters:
+        inp: string containing LaTeX macros
+
+    Returns:
+        A string with the UTF-8 equivalent of the macros
     """
 
     return LtxUTF8Parser(inp, REVERSE_TRANSLATION_TABLE).transform()

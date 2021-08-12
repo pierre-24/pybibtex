@@ -1,4 +1,8 @@
 flake8
 flake8-quotes
 autopep8
-Sphinx
+mkdocs
+mkdocs-material
+mkdocstrings
+pymdown-extensions
+MarkupSafe>=2.0

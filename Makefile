@@ -17,5 +17,5 @@ lint:
 test:
 	python -m unittest discover -s pybibtex.tests
 
-docs:
-	cd doc; make html
+doc:
+	mkdocs build

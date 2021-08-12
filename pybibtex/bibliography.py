@@ -8,12 +8,13 @@ class Item:
 
     You can access the fields directly using ``item['key']``.
 
-    .. note::
-        ``item_type`` and ``cite_key`` are case technically case insensitive,
-        but the actual ``cite_key`` is kept
+    !!! note
+        `item_type` and `cite_key` are case technically case insensitive,
+        but the actual `cite_key` is kept
 
     """
     def __init__(self, cite_key: str, item_type: str = 'article', fields: dict = None):
+        """Initialize the object"""
         self.cite_key = cite_key  #: citation key
         self.item_type = item_type.lower()  #: item type (article, book, ...)
         self.fields = fields
@@ -21,7 +22,8 @@ class Item:
     def authors(self, possible_fields: Iterable[str] = ('author', 'Author', 'AUTHOR')) -> List[Author]:
         """Get a list of ``Authors``.
 
-        :param possible_fields: looks for the fields in ``possible_fields`` to get the authors, stops when found.
+        Parameters:
+            possible_fields: looks for the fields in ``possible_fields`` to get the authors, stops when found.
         """
         for f in possible_fields:
             if f in self.fields:
@@ -56,9 +58,8 @@ class Database:
 
     You can access the item directly by their citation key using ``bibliography['citation-key']``.
 
-    .. note::
-
-        The ``cite_key`` are considered to be case insensitive in lookup.
+    !!! note
+        The `cite_key` are considered to be case insensitive in lookup.
     """
 
     def __init__(self, db: Dict[str, Item] = None):

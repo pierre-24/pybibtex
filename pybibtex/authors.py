@@ -4,9 +4,18 @@ from enum import Enum, unique
 
 class Author:
     """Represent an author
+
+    You can access:
+
+    + its last name, with `author.last` (always not empty),
+    + its first name, with `author.first` (may be empty),
+    + its "von" part, with `author.von` (may be empty),
+    + its "jr" part, with `author.jr` (may be empty).
     """
 
     def __init__(self, first: str, last: str, von: str = '', jr: str = ''):
+        """Initialize the object
+        """
         if not last:
             raise Exception('last must not be empty')
 
@@ -53,6 +62,8 @@ AUTHOR_SYMBOL_TR = {
 
 class AuthorToken:
     def __init__(self, typ_: AuthorTokenType, value: str, position: int = -1):
+        """Initialize the object
+        """
         self.type = typ_
         self.value = value
         self.position = position
@@ -84,6 +95,8 @@ class WordSequence:
 
 class PureWordSequence(WordSequence):
     def __init__(self, words: List[str], capitalization: List[int]):
+        """Initialize the object
+        """
         self.words = words
         self.capitalizations = capitalization
 
@@ -131,6 +144,8 @@ class PureWordSequence(WordSequence):
 
 class CommaSeparatedWordSequence(WordSequence):
     def __init__(self, seq: List[List[str]], capitalization: List[List[int]]):
+        """Initialize the object
+        """
         self.groups = seq
         self.num_fields = len(self.groups)
 
@@ -175,7 +190,12 @@ class AuthorsParser:
     """Parser to extract the authors
     """
 
-    def __init__(self, inp):
+    def __init__(self, inp: str):
+        """Initialize the object
+
+        Parameters:
+            inp: input string
+        """
         self.input = inp
         self.current_token: AuthorToken = None
         self.tokenizer = self.tokenize()
@@ -241,22 +261,26 @@ class AuthorsParser:
             self.next()
 
     def authors(self) -> List[Author]:
+        """Get the list of `Author`
+        """
+
         return [s.transform() for s in self.sequences()]
 
     def sequences(self) -> List[WordSequence]:
         """Get a list of word sequences (either pure or comma separated) separated by "and"
 
 
-        .. code-block:: text
-
-            spaces := SPACE SPACE* ;
-            words := word (spaces word)*
-            comma_sep_seq := words spaces? COMMA spaces? words (spaces? COMMA spaces? words)* ;
-            pure_seq := words
-            sequence := pure_seq
-                     | comma_sep_seq
-                     ;
-            sequences := sequence ("and" sequence)* ;
+        ```text
+        spaces := SPACE SPACE* ;
+        words := word (spaces word)*
+        comma_sep_seq :=
+            words spaces? COMMA spaces? words (spaces? COMMA spaces? words)* ;
+        pure_seq := words
+        sequence := pure_seq
+                 | comma_sep_seq
+                 ;
+        sequences := sequence ("and" sequence)* ;
+        ```
         """
 
         sequences: List[WordSequence] = []
@@ -311,14 +335,14 @@ class AuthorsParser:
 
         A ``BRACEDITEM`` has no case, but a special character has the one of its argument
 
-        .. code-block:: text
+        ```text
+        c := LETTER
+          | BRACEDITEM
+          | SPECIALCHAR
+          ;
 
-            c := LETTER
-              | BRACEDITEM
-              | SPECIALCHAR
-              ;
-
-            word := c c* ;
+        word := c c* ;
+        ```
         """
 
         check_capitalization = True
