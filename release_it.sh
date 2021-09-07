@@ -9,14 +9,14 @@ fi
 # get variables
 RELEASE_PART=$1
 CURRENT_BRANCH=$(git branch --show-current)
-INFO=$(bump2version --list --dry-run $RELEASE_PART)
+INFO=$(bump2version --list --dry-run "$RELEASE_PART")
 if [ "$?" -ne 0 ]; then
     >&2 echo "Error while running bump2version, exiting"
     exit 1
 fi
 
-CURRENT_VERSION=$(echo $INFO | grep "current_version" | sed -r s,"^.*=",,)
-NEW_VERSION=$(echo $INFO | grep "new_version" | sed -r s,"^.*=",,)
+CURRENT_VERSION=$(echo "$INFO" | grep "current_version" | sed -r s,"^.*=",,)
+NEW_VERSION=$(echo "$INFO" | grep "new_version" | sed -r s,"^.*=",,)
 
 # ask
 while true; do
@@ -37,10 +37,10 @@ fi
 git pull
 
 # bump version
-bump2version $RELEASE_PART --verbose
+bump2version "$RELEASE_PART" --verbose
 git push --follow-tags origin master
 
 # switch back to current branch
 if [[ $CURRENT_BRANCH != "master" ]]; then
-  git checkout $CURRENT_BRANCH
+  git checkout "$CURRENT_BRANCH"
 fi
