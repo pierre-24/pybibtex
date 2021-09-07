@@ -1,0 +1,1681 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Provides a Python API to parse BibTeX files.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://mkdocstrings.github.io/code_reference/parser/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>BibTeX Parser - pybibtex</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pybibtex.parser" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="pybibtex" class="md-header__button md-logo" aria-label="pybibtex" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            pybibtex
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BibTeX Parser
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/pierre-24/pybibtex/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pierre-24/pybibtex
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="pybibtex" class="md-nav__button md-logo" aria-label="pybibtex" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    pybibtex
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/pierre-24/pybibtex/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pierre-24/pybibtex
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Code reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Code reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bibliography/" class="md-nav__link">
+        Bibliography
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          BibTeX Parser
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        BibTeX Parser
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser" class="md-nav__link">
+    pybibtex.parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.Lexer" class="md-nav__link">
+    Lexer
+  </a>
+  
+    <nav class="md-nav" aria-label="Lexer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Lexer.next" class="md-nav__link">
+    next()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser" class="md-nav__link">
+    Parser
+  </a>
+  
+    <nav class="md-nav" aria-label="Parser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.comment" class="md-nav__link">
+    comment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.database" class="md-nav__link">
+    database()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.field" class="md-nav__link">
+    field()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.inside_item" class="md-nav__link">
+    inside_item()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.inside_string_var" class="md-nav__link">
+    inside_string_var()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.key" class="md-nav__link">
+    key()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.literal" class="md-nav__link">
+    literal()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.next" class="md-nav__link">
+    next()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.skip_any_but_item" class="md-nav__link">
+    skip_any_but_item()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.skip_empty" class="md-nav__link">
+    skip_empty()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.string_part" class="md-nav__link">
+    string_part()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.value" class="md-nav__link">
+    value()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.TokenType" class="md-nav__link">
+    TokenType
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utf8/" class="md-nav__link">
+        UTF-8 handling
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser" class="md-nav__link">
+    pybibtex.parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.Lexer" class="md-nav__link">
+    Lexer
+  </a>
+  
+    <nav class="md-nav" aria-label="Lexer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Lexer.next" class="md-nav__link">
+    next()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser" class="md-nav__link">
+    Parser
+  </a>
+  
+    <nav class="md-nav" aria-label="Parser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.comment" class="md-nav__link">
+    comment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.database" class="md-nav__link">
+    database()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.field" class="md-nav__link">
+    field()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.inside_item" class="md-nav__link">
+    inside_item()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.inside_string_var" class="md-nav__link">
+    inside_string_var()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.key" class="md-nav__link">
+    key()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.literal" class="md-nav__link">
+    literal()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.next" class="md-nav__link">
+    next()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.skip_any_but_item" class="md-nav__link">
+    skip_any_but_item()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.skip_empty" class="md-nav__link">
+    skip_empty()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.string_part" class="md-nav__link">
+    string_part()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pybibtex.parser.Parser.value" class="md-nav__link">
+    value()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pybibtex.parser.TokenType" class="md-nav__link">
+    TokenType
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/pierre-24/pybibtex/blob/master/docs/code_reference/parser.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>BibTeX Parser</h1>
+                
+                <p>Example of usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pybibtex.parser</span> <span class="kn">import</span> <span class="n">Parser</span>
+
+<span class="n">bibtex</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">@string(bibtex = &quot;BiB{\TeX}&quot;)</span>
+<span class="s2">@misc{bibtexing,</span>
+<span class="s2">   author = &quot;Oren Patashnik&quot;,</span>
+<span class="s2">   title = bibtex # &quot;ing&quot;,</span>
+<span class="s2">   year = 1988</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">(</span><span class="n">bibtex</span><span class="p">)</span>
+<span class="n">database</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+
+<span class="c1"># access to item</span>
+<span class="k">assert</span> <span class="s1">&#39;bibtexing&#39;</span> <span class="ow">in</span> <span class="n">database</span>
+
+<span class="c1"># you can access the string variables after `parse()`</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="s1">&#39;bibtex&#39;</span><span class="p">])</span>  <span class="c1"># prints &quot;BiB{\TeX}&quot;</span>
+</code></pre></div>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="pybibtex.parser"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="pybibtex.parser.Lexer" class="doc doc-heading">
+        <code>Lexer</code>
+
+
+
+<a href="#pybibtex.parser.Lexer" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Lexer.next" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Lexer.next" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Go to next token</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Go to next token</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="pybibtex.parser.Parser" class="doc doc-heading">
+        <code>Parser</code>
+
+
+
+<a href="#pybibtex.parser.Parser" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Parser for the bibliography in BiBTeX format</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#pybibtex.parser.Parser.__init__" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initialize the object</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>inp</code></td>
+        <td><code>str</code></td>
+        <td><p>string containing the BiBTeX database</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize the object</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        inp: string containing the BiBTeX database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">lexer</span> <span class="o">=</span> <span class="n">Lexer</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">:</span> <span class="n">Token</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># month are defined by default</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;jan&#39;</span><span class="p">:</span> <span class="s1">&#39;january&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;feb&#39;</span><span class="p">:</span> <span class="s1">&#39;february&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mar&#39;</span><span class="p">:</span> <span class="s1">&#39;march&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;apr&#39;</span><span class="p">:</span> <span class="s1">&#39;april&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;may&#39;</span><span class="p">:</span> <span class="s1">&#39;may&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jun&#39;</span><span class="p">:</span> <span class="s1">&#39;june&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jul&#39;</span><span class="p">:</span> <span class="s1">&#39;july&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;aug&#39;</span><span class="p">:</span> <span class="s1">&#39;august&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;september&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;oct&#39;</span><span class="p">:</span> <span class="s1">&#39;october&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nov&#39;</span><span class="p">:</span> <span class="s1">&#39;november&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;dec&#39;</span><span class="p">:</span> <span class="s1">&#39;december&#39;</span>
+    <span class="p">}</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.comment" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.comment" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Skip whatever remains of the line</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Skip whatever remains of the line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.database" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.database" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The BibTeX format is more or less defined as</p>
+<div class="highlight"><pre><span></span><code>bibtex := (item | string_var | comment)*;
+</code></pre></div>
+<p>with</p>
+<div class="highlight"><pre><span></span><code>string_var := AT &#39;string&#39; (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;
+item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;
+comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
+</code></pre></div>
+<p>(it is missing the <code>@preamble</code> instruction).</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Database</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The BibTeX format is more or less defined as</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    bibtex := (item | string_var | comment)*;</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    with</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    string_var := AT &#39;string&#39; (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;</span>
+<span class="sd">    item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;</span>
+<span class="sd">    comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    (it is missing the `@preamble` instruction).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">db</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_any_but_item</span><span class="p">()</span>  <span class="c1"># go to the next @</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">AT</span><span class="p">)</span>
+
+        <span class="c1"># get type</span>
+        <span class="n">item_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">item_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;comment&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># get opening</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OPENINGS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected OPENINGS, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+            <span class="n">opening</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span>
+            <span class="n">closing</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">TokenType</span><span class="o">.</span><span class="n">LPAR</span><span class="p">:</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RPAR</span><span class="p">,</span>
+                <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">:</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span>
+            <span class="p">}[</span><span class="n">opening</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+            <span class="c1"># go inside</span>
+            <span class="k">if</span> <span class="n">item_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">inside_string_var</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inside_item</span><span class="p">(</span><span class="n">item_type</span><span class="p">)</span>
+                <span class="n">db</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">cite_key</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">item</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">closing</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_any_but_item</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Database</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.field" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.field" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get a field:</p>
+<div class="highlight"><pre><span></span><code>field := key EQUAL value ;
+</code></pre></div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a field:</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    field := key EQUAL value ;</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get key</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+
+    <span class="c1"># eat EQUAL</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EQUAL</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="c1"># get value and return</span>
+    <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.inside_item" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.inside_item" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get an item:</p>
+<div class="highlight"><pre><span></span><code>inside_item := key COMMA (field (COMMA field)*)? COMMA?
+</code></pre></div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get an item:</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    inside_item := key COMMA (field (COMMA field)*)? COMMA?</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get key</span>
+    <span class="n">item_citekey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+
+    <span class="c1"># eat COMMA</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="c1"># get fields</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>  <span class="c1"># empty value, skip</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">continue</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RPAR</span><span class="p">]:</span>  <span class="c1"># that&#39;s the end of it!</span>
+            <span class="k">break</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">ParserSyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;while parsing </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item_citekey</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+        <span class="n">fields</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">Item</span><span class="p">(</span><span class="n">cite_key</span><span class="o">=</span><span class="n">item_citekey</span><span class="p">,</span> <span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.inside_string_var" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.inside_string_var" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Defines a string variable:</p>
+<div class="highlight"><pre><span></span><code>inside_string_var := key EQUAL value ;
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>key</code> is maybe a bit broadly defined (is <code>:</code> valid?)</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Defines a string variable:</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    inside_string_var := key EQUAL value ;</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    !!! note</span>
+<span class="sd">        `key` is maybe a bit broadly defined (is `:` valid?)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get placeholder</span>
+    <span class="n">placeholder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+
+    <span class="c1"># eat EQUAL</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EQUAL</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="c1"># get value and define</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="n">placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.key" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.key" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get a key,</p>
+<div class="highlight"><pre><span></span><code>key := [a-zA-Z0-9_\-:]*
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>That means that a key can start by an integer or <code>:</code> (that should not be a problem)</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get a key,</span>
+
+
+<span class="sd">    ```text</span>
+<span class="sd">    key := [a-zA-Z0-9_\\-:]*</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    !!! note</span>
+<span class="sd">        That means that a key can start by an integer or ``:`` (that should not be a problem)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">IS_KEY</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected literal, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+    <span class="n">citekey</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="n">IS_KEY</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+        <span class="n">citekey</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">citekey</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.literal" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.literal" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get a literal, as</p>
+<div class="highlight"><pre><span></span><code>literal := [a-aA-Z_] [a-zA-Z0-9_]*
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It cannot start by an integer, for obvious reasons.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get a literal, as</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    literal := [a-aA-Z_] [a-zA-Z0-9_]*</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    !!! note</span>
+<span class="sd">        It cannot start by an integer, for obvious reasons.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">IS_LITERAL_BEG</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected literal, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+    <span class="n">literal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="n">IS_LITERAL</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+        <span class="n">literal</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">literal</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.next" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.next" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get next token</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get next token&quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_next</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.skip_any_but_item" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.skip_any_but_item" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Skip anything until the next @, since it is considered to be a comment</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Skip anything until the next @, since it is considered to be a comment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">AT</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.skip_empty" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.skip_empty" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Skip spaces, newlines and comments</p>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Skip spaces, newlines and comments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.string_part" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.string_part" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get an actual string.</p>
+<p>Note that for a quote to be escaped, it must be inside braces.
+Which means that braces <strong>must</strong> match, even in quote.</p>
+<div class="highlight"><pre><span></span><code>INTEGER := [0-9]
+
+sl := CHAR*
+   | QUOTE
+   | LBRACE sl* RBRACE
+   ;
+
+string_part := literal
+            | INTEGER INTEGER*
+            | LBRACE sl* RBRACE
+            | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE
+            ;
+</code></pre></div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get an actual string.</span>
+
+<span class="sd">    Note that for a quote to be escaped, it must be inside braces.</span>
+<span class="sd">    Which means that braces **must** match, even in quote.</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    INTEGER := [0-9]</span>
+
+<span class="sd">    sl := CHAR*</span>
+<span class="sd">       | QUOTE</span>
+<span class="sd">       | LBRACE sl* RBRACE</span>
+<span class="sd">       ;</span>
+
+<span class="sd">    string_part := literal</span>
+<span class="sd">                | INTEGER INTEGER*</span>
+<span class="sd">                | LBRACE sl* RBRACE</span>
+<span class="sd">                | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE</span>
+<span class="sd">                ;</span>
+<span class="sd">    ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>  <span class="c1"># its a pure integer</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+                <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># ... it is a literal, then</span>
+            <span class="n">lit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="n">lit</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not defined&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lit</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span><span class="p">]:</span>
+        <span class="n">opening_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">brace_level</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">:</span>
+                <span class="n">brace_level</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span><span class="p">:</span>
+                <span class="n">brace_level</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span> <span class="ow">and</span> <span class="n">brace_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                    <span class="k">break</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span> <span class="ow">and</span> <span class="n">brace_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                    <span class="k">break</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;got </span><span class="si">{}</span><span class="s1"> while parsing string&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+            <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected string, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">value</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="pybibtex.parser.Parser.value" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#pybibtex.parser.Parser.value" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A value is a string, but different stuffs can be concatenated.</p>
+<div class="highlight"><pre><span></span><code>value := string_part (POUND string_part)* ;
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It means that integer can be concatenated, deal with it.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A value is a string, but different stuffs can be concatenated.</span>
+
+<span class="sd">    ```text</span>
+<span class="sd">    value := string_part (POUND string_part)* ;</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    !!! note</span>
+<span class="sd">        It means that integer can be concatenated, deal with it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_part</span><span class="p">()</span>
+
+    <span class="c1"># concatenate?</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">POUND</span><span class="p">:</span>
+        <span class="c1"># eat POUND</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="c1"># get next value</span>
+        <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_part</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+    <span class="c1"># ok, done</span>
+    <span class="k">return</span> <span class="n">value</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="pybibtex.parser.TokenType" class="doc doc-heading">
+        <code>TokenType</code>
+
+
+
+<a href="#pybibtex.parser.TokenType" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../bibliography/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bibliography" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Bibliography
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../authors/" class="md-footer__link md-footer__link--next" aria-label="Next: Authors" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Authors
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
