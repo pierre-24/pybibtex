@@ -1,0 +1,59 @@
+[project]
+name = "pybibtex"
+dynamic = ["version"]
+
+description = "pybibtex: provides a Python API to parse BibTeX files."
+readme = "README.md" # Optional
+requires-python = ">=3.11"
+
+license = {file = "LICENSE"}
+
+authors = [
+  {name = "Pierre Beaujean", email = "pierre.beaujean@unamur.be" } # Optional
+]
+
+maintainers = [
+  {name = "Pierre Beaujean", email = "pierre.beaujean@unamur.be" } # Optional
+]
+
+classifiers = [
+    # For a list of valid classifiers, see https://pypi.org/classifiers/
+    "Development Status :: 3 - Alpha",
+
+    "Intended Audience :: Developers",
+
+    "License :: OSI Approved :: MIT License",
+
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "flake8",
+    "flake8-quotes",
+    "autopep8",
+    "mkdocs",
+    "mkdocs-material",
+    "pymdown-extensions",
+    "mkdocstrings",
+    "bump2version",
+]
+
+[project.urls]  # Optional
+"Homepage" = "https://github.com/pierre-24/pybibtex"
+"Bug Reports" = "https://github.com/pierre-24/pybibtex/issues"
+"Source" = "https://github.com/pierre-24/pybibtex/"
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pybibtex.__version__"}
