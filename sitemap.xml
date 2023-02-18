@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mkdocstrings.github.io/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/contributing/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/usage/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/code_reference/authors/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/code_reference/bibliography/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/code_reference/parser/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mkdocstrings.github.io/code_reference/utf8/</loc>
-         <lastmod>2021-09-07</lastmod>
+         <lastmod>2023-02-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

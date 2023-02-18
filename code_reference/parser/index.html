@@ -10,11 +10,16 @@
       
       
       
-      
         <link rel="canonical" href="https://mkdocstrings.github.io/code_reference/parser/">
       
+      
+        <link rel="prev" href="../bibliography/">
+      
+      
+        <link rel="next" href="../authors/">
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
     
     
       
@@ -22,30 +27,32 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ffa9267a.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
         
-      
-    
-    
-    
-      
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-
+    
     
     
   </head>
@@ -56,10 +63,9 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -76,16 +82,19 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+    
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="pybibtex" class="md-header__button md-logo" aria-label="pybibtex" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -107,22 +116,21 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
       
@@ -133,7 +141,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -142,11 +150,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/pierre-24/pybibtex/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/pierre-24/pybibtex" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pierre-24/pybibtex
@@ -155,11 +162,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -178,18 +188,17 @@
     <a href="../.." title="pybibtex" class="md-nav__button md-logo" aria-label="pybibtex" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     pybibtex
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/pierre-24/pybibtex/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/pierre-24/pybibtex" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     pierre-24/pybibtex
@@ -242,13 +251,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
-      <label class="md-nav__link" for="__nav_3">
-        Code reference
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Code reference" data-md-level="1">
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Code reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Code reference
@@ -256,6 +270,7 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+              
   
   
   
@@ -266,8 +281,10 @@
     </li>
   
 
+            
           
             
+              
   
   
     
@@ -275,7 +292,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
@@ -289,6 +306,7 @@
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -431,13 +449,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#pybibtex.parser.TokenType" class="md-nav__link">
-    TokenType
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -445,8 +456,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -457,8 +470,10 @@
     </li>
   
 
+            
           
             
+              
   
   
   
@@ -469,6 +484,7 @@
     </li>
   
 
+            
           
         </ul>
       </nav>
@@ -503,6 +519,7 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -645,13 +662,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#pybibtex.parser.TokenType" class="md-nav__link">
-    TokenType
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -660,18 +670,19 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
-                  <a href="https://github.com/pierre-24/pybibtex/blob/master/docs/code_reference/parser.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                  <h1>BibTeX Parser</h1>
-                
-                <p>Example of usage:</p>
+                  
+
+  
+  
+
+
+  <h1>BibTeX Parser</h1>
+
+<p>Example of usage:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pybibtex.parser</span> <span class="kn">import</span> <span class="n">Parser</span>
 
 <span class="n">bibtex</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -694,13 +705,13 @@
 </code></pre></div>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
 
 <a id="pybibtex.parser"></a>
-    <div class="doc doc-contents first">
+  <div class="doc doc-contents first">
 
-
-
+  
 
   <div class="doc doc-children">
 
@@ -711,11 +722,7 @@
 
 
 
-
-
-
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
@@ -723,14 +730,74 @@
         <code>Lexer</code>
 
 
-
 <a href="#pybibtex.parser.Lexer" class="headerlink" title="Permanent link">¤</a></h2>
 
-    <div class="doc doc-contents ">
+
+  <div class="doc doc-contents ">
 
 
 
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Lexer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">inp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="kc">None</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Go to next token</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Token</span><span class="p">]:</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="ow">in</span> <span class="n">SYMBOL_TR</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">Token</span><span class="p">(</span><span class="n">SYMBOL_TR</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_char</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">Token</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="k">yield</span> <span class="n">Token</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
 
   <div class="doc doc-children">
 
@@ -742,25 +809,33 @@
 
 
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Lexer.next" class="doc doc-heading">
-<code class="highlight language-python"><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="nb">next</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Lexer.next" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Go to next token</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Go to next token</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Go to next token</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -769,26 +844,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
-
-
+</div>
 
 
 
   </div>
 
-    </div>
-
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-class">
+<div class="doc doc-object doc-class">
 
 
 
@@ -796,15 +866,738 @@
         <code>Parser</code>
 
 
-
 <a href="#pybibtex.parser.Parser" class="headerlink" title="Permanent link">¤</a></h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+
+  
       <p>Parser for the bibliography in BiBTeX format</p>
 
 
+        <details class="quote">
+          <summary>Source code in <code>pybibtex/parser.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Parser</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parser for the bibliography in BiBTeX format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the object</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            inp: string containing the BiBTeX database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lexer</span> <span class="o">=</span> <span class="n">Lexer</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">:</span> <span class="n">Token</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># month are defined by default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;jan&#39;</span><span class="p">:</span> <span class="s1">&#39;january&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;feb&#39;</span><span class="p">:</span> <span class="s1">&#39;february&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mar&#39;</span><span class="p">:</span> <span class="s1">&#39;march&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;apr&#39;</span><span class="p">:</span> <span class="s1">&#39;april&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;may&#39;</span><span class="p">:</span> <span class="s1">&#39;may&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;jun&#39;</span><span class="p">:</span> <span class="s1">&#39;june&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;jul&#39;</span><span class="p">:</span> <span class="s1">&#39;july&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;aug&#39;</span><span class="p">:</span> <span class="s1">&#39;august&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;september&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oct&#39;</span><span class="p">:</span> <span class="s1">&#39;october&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;nov&#39;</span><span class="p">:</span> <span class="s1">&#39;november&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dec&#39;</span><span class="p">:</span> <span class="s1">&#39;december&#39;</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next token&quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span> <span class="o">=</span> <span class="n">Token</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get next token&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TokenType</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">typ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected </span><span class="si">{}</span><span class="s1">, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Skip spaces, newlines and comments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Skip anything until the next @, since it is considered to be a comment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">AT</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Database</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a literal, as</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        literal := [a-aA-Z_] [a-zA-Z0-9_]*</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        !!! note</span>
+<span class="sd">            It cannot start by an integer, for obvious reasons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">IS_LITERAL_BEG</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected literal, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+        <span class="n">literal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="n">IS_LITERAL</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">literal</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">literal</span>
+
+    <span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a key,</span>
+
+
+<span class="sd">        ```text</span>
+<span class="sd">        key := [a-zA-Z0-9_\\-:]*</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        !!! note</span>
+<span class="sd">            That means that a key can start by an integer or ``:`` (that should not be a problem)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">IS_KEY</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected literal, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+        <span class="n">citekey</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="n">IS_KEY</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">citekey</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">citekey</span>
+
+    <span class="k">def</span> <span class="nf">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Database</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The BibTeX format is more or less defined as</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        bibtex := (item | string_var | comment)*;</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        with</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        string_var := AT &#39;string&#39; (LCBRACE inside_string_var RCBRACE | LPAR inside_string_var RPAR) ;</span>
+<span class="sd">        item := AT literal (LCBRACE inside_item RCBRACE | LPAR inside_item RPAR) ;</span>
+<span class="sd">        comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        (it is missing the `@preamble` instruction).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_any_but_item</span><span class="p">()</span>  <span class="c1"># go to the next @</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">AT</span><span class="p">)</span>
+
+            <span class="c1"># get type</span>
+            <span class="n">item_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">item_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;comment&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comment</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># get opening</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OPENINGS</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected OPENINGS, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+                <span class="n">opening</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span>
+                <span class="n">closing</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="n">TokenType</span><span class="o">.</span><span class="n">LPAR</span><span class="p">:</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RPAR</span><span class="p">,</span>
+                    <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">:</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span>
+                <span class="p">}[</span><span class="n">opening</span><span class="p">]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+                <span class="c1"># go inside</span>
+                <span class="k">if</span> <span class="n">item_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">inside_string_var</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inside_item</span><span class="p">(</span><span class="n">item_type</span><span class="p">)</span>
+                    <span class="n">db</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">cite_key</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">item</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">closing</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_any_but_item</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Database</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Skip whatever remains of the line</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines a string variable:</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        inside_string_var := key EQUAL value ;</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        !!! note</span>
+<span class="sd">            `key` is maybe a bit broadly defined (is `:` valid?)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get placeholder</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+
+        <span class="c1"># eat EQUAL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EQUAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="c1"># get value and define</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="n">placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an item:</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        inside_item := key COMMA (field (COMMA field)*)? COMMA?</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get key</span>
+        <span class="n">item_citekey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+
+        <span class="c1"># eat COMMA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="c1"># get fields</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>  <span class="c1"># empty value, skip</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="k">continue</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RPAR</span><span class="p">]:</span>  <span class="c1"># that&#39;s the end of it!</span>
+                <span class="k">break</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">ParserSyntaxError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;while parsing </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item_citekey</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+            <span class="n">fields</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">Item</span><span class="p">(</span><span class="n">cite_key</span><span class="o">=</span><span class="n">item_citekey</span><span class="p">,</span> <span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a field:</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        field := key EQUAL value ;</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get key</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+
+        <span class="c1"># eat EQUAL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EQUAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="c1"># get value and return</span>
+        <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A value is a string, but different stuffs can be concatenated.</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        value := string_part (POUND string_part)* ;</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        !!! note</span>
+<span class="sd">            It means that integer can be concatenated, deal with it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_part</span><span class="p">()</span>
+
+        <span class="c1"># concatenate?</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">POUND</span><span class="p">:</span>
+            <span class="c1"># eat POUND</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+            <span class="c1"># get next value</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_part</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
+
+        <span class="c1"># ok, done</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an actual string.</span>
+
+<span class="sd">        Note that for a quote to be escaped, it must be inside braces.</span>
+<span class="sd">        Which means that braces **must** match, even in quote.</span>
+
+<span class="sd">        ```text</span>
+<span class="sd">        INTEGER := [0-9]</span>
+
+<span class="sd">        sl := CHAR*</span>
+<span class="sd">           | QUOTE</span>
+<span class="sd">           | LBRACE sl* RBRACE</span>
+<span class="sd">           ;</span>
+
+<span class="sd">        string_part := literal</span>
+<span class="sd">                    | INTEGER INTEGER*</span>
+<span class="sd">                    | LBRACE sl* RBRACE</span>
+<span class="sd">                    | QQUOTE (CHAR* | LCBRACE sl* RCBRACE)* QUOTE</span>
+<span class="sd">                    ;</span>
+<span class="sd">        ```</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>  <span class="c1"># its a pure integer</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">CHAR</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+                    <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># ... it is a literal, then</span>
+                <span class="n">lit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">literal</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="n">lit</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not defined&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lit</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span><span class="p">]:</span>
+            <span class="n">opening_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">brace_level</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span><span class="p">:</span>
+                    <span class="n">brace_level</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">RCBRACE</span><span class="p">:</span>
+                    <span class="n">brace_level</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">LCBRACE</span> <span class="ow">and</span> <span class="n">brace_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                        <span class="k">break</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">opening_char</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">QUOTE</span> <span class="ow">and</span> <span class="n">brace_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                        <span class="k">break</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;got </span><span class="si">{}</span><span class="s1"> while parsing string&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+                <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">value</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected string, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">value</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
 
   <div class="doc doc-children">
 
@@ -816,46 +1609,75 @@
 
 
 
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span></code>
 
 <a href="#pybibtex.parser.Parser.__init__" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Initialize the object</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>inp</code></td>
-        <td><code>str</code></td>
-        <td><p>string containing the BiBTeX database</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Initialize the object</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>inp</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>string containing the BiBTeX database</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the object</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        inp: string containing the BiBTeX database</span>
@@ -882,56 +1704,57 @@
     <span class="p">}</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.comment" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">comment</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.comment" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Skip whatever remains of the line</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Skip whatever remains of the line</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Skip whatever remains of the line</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.database" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">database</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.database" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>The BibTeX format is more or less defined as</p>
 <div class="highlight"><pre><span></span><code>bibtex := (item | string_var | comment)*;
 </code></pre></div>
@@ -942,10 +1765,68 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 </code></pre></div>
 <p>(it is missing the <code>@preamble</code> instruction).</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Database</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Database</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The BibTeX format is more or less defined as</span>
 
 <span class="sd">    ```text</span>
@@ -1003,35 +1884,51 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 
     <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Database</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.field" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">field</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.field" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get a field:</p>
 <div class="highlight"><pre><span></span><code>field := key EQUAL value ;
 </code></pre></div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get a field:</span>
 
 <span class="sd">    ```text</span>
@@ -1050,34 +1947,74 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 
     <span class="c1"># get value and return</span>
     <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.inside_item" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">inside_item</span><span class="p">(</span><span class="n">item_type</span><span class="p">)</span></code>
 
 <a href="#pybibtex.parser.Parser.inside_item" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get an item:</p>
 <div class="highlight"><pre><span></span><code>inside_item := key COMMA (field (COMMA field)*)? COMMA?
 </code></pre></div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get an item:</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">inside_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get an item:</span>
 
 <span class="sd">    ```text</span>
 <span class="sd">    inside_item := key COMMA (field (COMMA field)*)? COMMA?</span>
@@ -1119,26 +2056,24 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
             <span class="bp">self</span><span class="o">.</span><span class="n">skip_empty</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">Item</span><span class="p">(</span><span class="n">cite_key</span><span class="o">=</span><span class="n">item_citekey</span><span class="p">,</span> <span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.inside_string_var" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">inside_string_var</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.inside_string_var" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Defines a string variable:</p>
 <div class="highlight"><pre><span></span><code>inside_string_var := key EQUAL value ;
 </code></pre></div>
@@ -1147,10 +2082,31 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 <p><code>key</code> is maybe a bit broadly defined (is <code>:</code> valid?)</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Defines a string variable:</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">inside_string_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines a string variable:</span>
 
 <span class="sd">    ```text</span>
 <span class="sd">    inside_string_var := key EQUAL value ;</span>
@@ -1171,26 +2127,24 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
     <span class="c1"># get value and define</span>
     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">string_variables</span><span class="p">[</span><span class="n">placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.key" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">key</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.key" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get a key,</p>
 <div class="highlight"><pre><span></span><code>key := [a-zA-Z0-9_\-:]*
 </code></pre></div>
@@ -1199,10 +2153,31 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 <p>That means that a key can start by an integer or <code>:</code> (that should not be a problem)</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get a key,</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a key,</span>
 
 
 <span class="sd">    ```text</span>
@@ -1223,26 +2198,24 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">citekey</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.literal" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">literal</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.literal" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get a literal, as</p>
 <div class="highlight"><pre><span></span><code>literal := [a-aA-Z_] [a-zA-Z0-9_]*
 </code></pre></div>
@@ -1251,10 +2224,31 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
 <p>It cannot start by an integer, for obvious reasons.</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get a literal, as</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">literal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a literal, as</span>
 
 <span class="sd">    ```text</span>
 <span class="sd">    literal := [a-aA-Z_] [a-zA-Z0-9_]*</span>
@@ -1275,115 +2269,119 @@ comment := (AT &#39;comment&#39; CHAR* NL | CHAR*)
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">literal</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.next" class="doc doc-heading">
-<code class="highlight language-python"><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="nb">next</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.next" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get next token</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get next token&quot;&quot;&quot;</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get next token&quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_next</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.skip_any_but_item" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">skip_any_but_item</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.skip_any_but_item" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Skip anything until the next @, since it is considered to be a comment</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Skip anything until the next @, since it is considered to be a comment</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">skip_any_but_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Skip anything until the next @, since it is considered to be a comment</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">AT</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">EOS</span><span class="p">]:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.skip_empty" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">skip_empty</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.skip_empty" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Skip spaces, newlines and comments</p>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Skip spaces, newlines and comments</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">skip_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Skip spaces, newlines and comments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TokenType</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span> <span class="n">TokenType</span><span class="o">.</span><span class="n">NL</span><span class="p">]:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.string_part" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">string_part</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.string_part" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Get an actual string.</p>
 <p>Note that for a quote to be escaped, it must be inside braces.
 Which means that braces <strong>must</strong> match, even in quote.</p>
@@ -1401,10 +2399,71 @@ string_part := literal
             ;
 </code></pre></div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get an actual string.</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">string_part</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get an actual string.</span>
 
 <span class="sd">    Note that for a quote to be escaped, it must be inside braces.</span>
 <span class="sd">    Which means that braces **must** match, even in quote.</span>
@@ -1465,26 +2524,24 @@ string_part := literal
         <span class="k">raise</span> <span class="n">ParserSyntaxError</span><span class="p">(</span><span class="s1">&#39;expected string, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_token</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">value</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
 
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
 <h3 id="pybibtex.parser.Parser.value" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
+<code class="highlight language-python"><span class="n">value</span><span class="p">()</span></code>
 
 <a href="#pybibtex.parser.Parser.value" class="headerlink" title="Permanent link">¤</a></h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>A value is a string, but different stuffs can be concatenated.</p>
 <div class="highlight"><pre><span></span><code>value := string_part (POUND string_part)* ;
 </code></pre></div>
@@ -1493,10 +2550,35 @@ string_part := literal
 <p>It means that integer can be concatenated, deal with it.</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>pybibtex/parser.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;A value is a string, but different stuffs can be concatenated.</span>
+      <details class="quote">
+        <summary>Source code in <code>pybibtex/parser.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A value is a string, but different stuffs can be concatenated.</span>
 
 <span class="sd">    ```text</span>
 <span class="sd">    value := string_part (POUND string_part)* ;</span>
@@ -1521,147 +2603,55 @@ string_part := literal
 
     <span class="c1"># ok, done</span>
     <span class="k">return</span> <span class="n">value</span>
-</code></pre></div>
-        </details>
-    </div>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
 
   </div>
 
-
-
-
-
   </div>
 
-    </div>
-
-  </div>
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h2 id="pybibtex.parser.TokenType" class="doc doc-heading">
-        <code>TokenType</code>
-
-
-
-<a href="#pybibtex.parser.TokenType" class="headerlink" title="Permanent link">¤</a></h2>
-
-    <div class="doc doc-contents ">
-
-      <p>An enumeration.</p>
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
 
 
   </div>
 
-    </div>
-
   </div>
 
+</div>
 
 
 
 
 
-
-  </div>
-
-    </div>
-
-  </div>
                 
-              
-              
-                
-
-
-              
-            </article>
-          </div>
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
       
-        
-<footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../bibliography/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bibliography" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Bibliography
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../authors/" class="md-footer__link md-footer__link--next" aria-label="Next: Authors" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Authors
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
+        <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-        
-      </div>
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -1671,10 +2661,11 @@ string_part := literal
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
       
     
   </body>
