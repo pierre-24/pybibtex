@@ -242,6 +242,45 @@ class ParserStringTestCase(unittest.TestCase):
         self.assertEqual(db['whatever'].fields['key'], val1 + val_in + val2)
 
 
+class DatabaseTestCase(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.db = P.Parser('@misc(item1, key = {val{u}e}) @misc(item2, key = "valu{"}e{"}")').parse()
+
+    def test_contains(self):
+        self.assertTrue('item1' in self.db)
+        self.assertTrue('item2' in self.db)
+        self.assertFalse('item3' in self.db)
+
+    def test_iter(self):
+
+        self.assertEqual(list(self.db), ['item1', 'item2'])
+        self.assertEqual(list(self.db.iter_item()), [self.db['item1'], self.db['item2']])
+
+
+class ItemTestCase(unittest.TestCase):
+
+    def setUp(self) -> None:
+
+        item_type = 'article'
+        item_name = 'test'
+        self.item_k1_key = 'abc'
+        self.item_k1_value = 'de f'
+        self.item_k2_key = 'ijh'
+        self.item_k2_value = 'test@xyz'
+
+        database_str = '@{}{{{}, {} = "{}", {} = "{}", }}'.format(
+            item_type, item_name, self.item_k1_key, self.item_k1_value, self.item_k2_key, self.item_k2_value)
+
+        self.db = P.Parser(database_str).parse()
+        self.item = self.db[item_name]
+
+    def test_contains(self):
+        self.assertTrue(self.item_k1_key in self.item)
+        self.assertTrue(self.item_k2_key in self.item)
+        self.assertFalse(self.item_k1_key + self.item_k2_key in self.item)
+
+
 class LaTeXUTF8TestCase(unittest.TestCase):
 
     @staticmethod

@@ -71,9 +71,11 @@ class Database:
     def __contains__(self, item) -> bool:
         return item.lower() in self.db
 
-    def __iter__(self):
-        for item in self.db:
-            yield item
+    def __iter__(self) -> Iterable[str]:
+        yield from self.db
+
+    def iter_item(self) -> Iterable[Item]:
+        yield from self.db.values()
 
     def __repr__(self):
         return ', '.join('@{}({})'.format(i.item_type, i.cite_key) for i in self.db.values())
