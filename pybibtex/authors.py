@@ -43,6 +43,12 @@ class Author:
             '' if not self.jr else ", jr='{}'".format(self.jr)
         )
 
+    def __eq__(self, other: 'Author'):
+        if type(other) is not Author:
+            return False
+
+        return self.first == other.first and self.last == other.last and self.jr == other.jr and self.von == other.von
+
 
 @unique
 class AuthorTokenType(Enum):
@@ -303,6 +309,7 @@ class AuthorsParser:
 
                 if word.lower() == 'and':
                     make_seq()
+                    group = 0
                     words = [[]]
                     capitalizations = [[]]
                 else:

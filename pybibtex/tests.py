@@ -354,15 +354,11 @@ class AuthorsTestCase(unittest.TestCase):
         von = 'bb xx'
         last = 'Cc Dd'
         jr = 'jj'
+        expected = Author(first, last, von, jr)
+
         authors = self.transform('{v} {l}, {j}, {f}'.format(f=first, v=von, l=last, j=jr))
-
         self.assertEqual(len(authors), 1)
-
-        author = authors[0]
-        self.assertEqual(author.first, first)
-        self.assertEqual(author.last, last)
-        self.assertEqual(author.von, von)
-        self.assertEqual(author.jr, jr)
+        self.assertEqual(expected, authors[0])
 
     def test_xd_resource(self):
         """Run http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html#splitting_examples
@@ -406,13 +402,10 @@ class AuthorsTestCase(unittest.TestCase):
         ]
 
         for p, f in test_suite:
+            expected = Author(p['f'], p['l'], p['v'], p['j'])
             authors = self.transform(f.format(**p))
             self.assertEqual(len(authors), 1)
-            author = authors[0]
-            self.assertEqual(author.first, p['f'])
-            self.assertEqual(author.last, p['l'])
-            self.assertEqual(author.von, p['v'])
-            self.assertEqual(author.jr, p['j'])
+            self.assertEqual(expected, authors[0])
 
     def test_tdb(self):
         """Run the tests found in "Tames the Beast" for the "natural" form
@@ -435,9 +428,16 @@ class AuthorsTestCase(unittest.TestCase):
         ]
 
         for p, f in test_suite:
+            expected = Author(p['f'], p['l'], p['v'])
             authors = self.transform(f.format(**p))
             self.assertEqual(len(authors), 1)
-            author = authors[0]
-            self.assertEqual(author.first, p['f'])
-            self.assertEqual(author.last, p['l'])
-            self.assertEqual(author.von, p['v'])
+            self.assertEqual(expected, authors[0])
+
+    def test_multi_authors(self):
+        """Stupid mistake, so it deserves a test"""
+
+        expected = [Author('P.', 'Hohenberg'), Author('H.', 'Khon')]
+
+        self.assertEqual(expected, self.transform('Hohenberg, P. and Khon, H.'))
+        self.assertEqual(expected, self.transform('P. Hohenberg and Khon, H.'))
+        self.assertEqual(expected, self.transform('P. Hohenberg and H. Khon'))
