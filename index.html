@@ -450,7 +450,7 @@
 
 <h1 id="pybibtex-a-very-simple-bibtex-parser"><code>pybibtex</code>: a (very) simple BibTeX parser<a class="headerlink" href="#pybibtex-a-very-simple-bibtex-parser" title="Permanent link">¤</a></h1>
 <p>Provides a Python API to parse BibTeX files.
-Not to be confused with the (actual) <a href="https://github.com/rasbt/pybibtex"><code>pybibtex</code></a>: while this implementation is a more clever approach (this is actual syntax parsing, not REGEX).</p>
+Not to be confused with the (actual) <a href="https://github.com/rasbt/pybibtex"><code>pybibtex</code></a>, which uses REGEX, while this implementation use an actual LL(1) parser (less error-prone, normally).</p>
 <p>The BiBTeX syntax is introduced, simply, <a href="https://www.bibtex.com/g/bibtex-format/">there</a>.
 More details are found in <a href="https://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/"><code>btxdoc</code></a> (and some of its quirks are examplified <a href="http://artis.imag.fr/~Xavier.Decoret/resources/xdkbibtex/bibtex_summary.html">here</a>).
 This implementation handles the different syntax for the items (braces or parentheses), the comments, and the concatenation (with the <code>@string</code> definitions).
