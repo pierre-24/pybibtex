@@ -17,5 +17,5 @@ lint:
 test:
 	python -m unittest discover -s pybibtex.tests
 
-doc:
-	mkdocs build
+doc-serve:
+	mkdocs serve

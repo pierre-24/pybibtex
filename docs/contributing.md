@@ -1,3 +1,5 @@
+# Install and contribute
+
 If you want to contribute, this is the usual deal: 
 
 1. Start by [forking](https://guides.github.com/activities/forking/), then clone your fork
@@ -9,39 +11,35 @@ If you want to contribute, this is the usual deal:
   ```bash
   python -m venv venv # a virtualenv is always a good idea
   source venv/bin/activate
-  make init  # install what's needed for dev
+  make install # install what's needed for dev
   ```
-3. You can also build the documentation with
-  ```bash
-  make doc
-  ```
-  And then visit [`site/index.html`](site/index.html).
 
-Don't forget to work on a separate branch, and to run the linting and tests:
+## Tips to contribute
 
-```bash
-make lint  # flake8
-make test  # unit tests
-```
++ A good place to start is the [list of issues](https://github.com/pierre-24/pybibtex/issues).
+  In fact, it is easier if you start by filling an issue, and if you want to work on it, says so there, so that everyone knows that the issue is handled.
 
-## Design rules
++ Don't forget to work on a separate branch: you should base your branch on `master`, not work in it directly:
 
-+ The code is written in Python 3, and follows the (in)famous [PEP-8](http://legacy.python.org/dev/peps/pep-0008/). You can check it by running ``make lint``, which launch the ``flake`` utility.
-+ Codes and comments are written in english.
-+ The code is documented using docstrings and [mkdocs](https://mkdocs.org/). 
-  The docstrings must contain the basic description of the function, as well as a description of the parameters.
-+ The code is tested. You can launch the test series by using ``make test``.
-  Every functionality should be provided with at least one unit test.
-+ The package is documented. You can generate this documentation by using ``make doc``. 
-  Non-basic stuffs should be explained in this documentation. 
-  Don't forget to cite some articles or website if needed.
+    ```bash
+    git checkout -b new_branch origin/master
+    ```
+ 
++ Don't forget to regularly run the linting and tests:
 
-## Workflow
+    ```bash
+    make lint
+    make test
+    ```
+    
+    Indeed, the code follows the [PEP-8 style recommendations](http://legacy.python.org/dev/peps/pep-0008/), checked by [`flake8`](https://flake8.pycqa.org/en/latest/), for the python part and use [`jshint`](https://jshint.com/) for the JS part.
+    Having an extensive test suite is also a good idea to prevent regressions.
 
-Adapted from the (in)famous [Git flow](http://nvie.com/posts/a-successful-git-branching-model/).
-This project is not large enough to have a `dev` branch, the tags should be sufficient.
++ If you want to see and edit the doc, you can run the `mkdocs` webserver:
 
-+ Development is made in the ``master`` branch, which contains the production version.
-+ Functionality are added through merge request (MR) in the ``master`` branch. Do not work in ``master`` directly, but create a new branch (``git checkout -b my_branch origin/master``).
-+ Theses merge requests should be unitary, and include unit test(s) and documentation if needed. The test suite must succeed for the merge request to be accepted.
-+ At some (random) points, a new version is created, with a tag of the form ``vX.Y.Z``.
+    ```bash
+    make doc-serve
+    ```
+
++ Pull requests should be unitary, and include unit test(s) and documentation if needed. 
+  The test suite and lint must succeed for the merge request to be accepted.
