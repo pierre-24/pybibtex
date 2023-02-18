@@ -43,7 +43,6 @@ dev = [
     "mkdocs",
     "mkdocs-material",
     "pymdown-extensions",
-    "mkdocstrings",
     "mkdocstrings[python]",
     "bump2version",
 ]
