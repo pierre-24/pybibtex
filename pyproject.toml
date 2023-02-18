@@ -3,8 +3,8 @@ name = "pybibtex"
 dynamic = ["version"]
 
 description = "pybibtex: provides a Python API to parse BibTeX files."
-readme = "README.md" # Optional
-requires-python = ">=3.11"
+readme = "README.md"
+requires-python = ">=3.7"
 
 license = {file = "LICENSE"}
 

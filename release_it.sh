@@ -1,12 +1,13 @@
 # check parameters
 if [ "$#" -ne 1 ]; then
     >&2 echo "Illegal number of parameters"
-    >&2 echo "usage: ./release_it.sh <part>"
+    >&2 echo "usage: ./release_it.sh [major|minor|patch]"
     exit 1
 fi
 
 
 # get variables
+MAIN_BRANCH="master"
 RELEASE_PART=$1
 CURRENT_BRANCH=$(git branch --show-current)
 INFO=$(bump2version --list --dry-run "$RELEASE_PART")
@@ -29,8 +30,8 @@ while true; do
 done
 
 
-# go to master and ensure latest version
-if [[ $CURRENT_BRANCH != "master" ]]; then
+# go to $MAIN_BRANCH
+if [[ $CURRENT_BRANCH != "$MAIN_BRANCH" ]]; then
   git checkout master
 fi
 
@@ -38,9 +39,9 @@ git pull
 
 # bump version
 bump2version "$RELEASE_PART" --verbose
-git push --follow-tags origin master
+git push --follow-tags origin $MAIN_BRANCH
 
 # switch back to current branch
-if [[ $CURRENT_BRANCH != "master" ]]; then
+if [[ $CURRENT_BRANCH != "$MAIN_BRANCH" ]]; then
   git checkout "$CURRENT_BRANCH"
 fi
